@@ -4,42 +4,30 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <meta name="theme-color" content="#050505">
-<title>Adaptive AI</title>
-<style>
-:root{--accent:#fff;--glass:.11;--blur:24px;--radius:24px}
-*{box-sizing:border-box}html,body{margin:0;min-height:100%;font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display","Segoe UI",sans-serif;background:#050505;color:#f5f5f7}
-body{overflow-x:hidden}
-body:before,body:after{content:"";position:fixed;pointer-events:none;z-index:-1;border-radius:50%;filter:blur(80px);opacity:.16}
-body:before{width:300px;height:300px;left:-100px;top:10%;background:var(--accent)}
-body:after{width:340px;height:340px;right:-120px;bottom:5%;background:var(--accent)}
-button,input,textarea{font:inherit;color:inherit}
-button{border:0;cursor:pointer}
-.app{min-height:100vh;display:grid;grid-template-rows:auto 1fr auto}
-.topbar,.bottombar,.panel,.composer,.card{background:rgba(255,255,255,var(--glass));border:1px solid rgba(255,255,255,.11);backdrop-filter:blur(var(--blur));-webkit-backdrop-filter:blur(var(--blur));box-shadow:0 18px 60px rgba(0,0,0,.25)}
-.topbar{position:sticky;top:12px;margin:12px;z-index:10;border-radius:20px;padding:12px 14px;display:flex;align-items:center;justify-content:space-between}
-.brand{display:flex;gap:10px;align-items:center;font-weight:700;letter-spacing:-.02em}.orb{width:30px;height:30px;border-radius:10px;background:linear-gradient(145deg,#fff,#777);box-shadow:0 0 25px rgba(255,255,255,.2)}
-.icon{width:42px;height:42px;border-radius:14px;background:rgba(255,255,255,.07);display:grid;place-items:center;border:1px solid rgba(255,255,255,.08);transition:.25s transform,.25s background}.icon:hover{transform:translateY(-2px) scale(1.03);background:rgba(255,255,255,.13)}
-main{width:min(1000px,calc(100% - 28px));margin:0 auto;padding:32px 0 110px}
-.view{display:none}.view.active{display:block;animation:in .35s ease}@keyframes in{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
-.hero{text-align:center;padding:7vh 10px 28px}.hero h1{font-size:clamp(38px,8vw,72px);letter-spacing:-.055em;margin:0 0 10px}.hero p{color:#a9a9af;font-size:16px;margin:0 auto 26px;max-width:570px;line-height:1.6}
-.suggestions{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}.suggestion{text-align:left;padding:18px;border-radius:20px}.suggestion b{display:block;margin-bottom:6px}.muted{color:#96969d}
-.chat{display:flex;flex-direction:column;gap:14px;min-height:58vh;padding-bottom:100px}.msg{max-width:min(78%,720px);padding:14px 17px;border-radius:20px;line-height:1.55;white-space:pre-wrap}.msg.user{align-self:flex-end;background:var(--accent);color:#080808;border-bottom-right-radius:7px}.msg.ai{align-self:flex-start;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.08);border-bottom-left-radius:7px}.msg small{display:block;margin-top:8px;opacity:.45;font-size:10px}
-.composer{position:fixed;z-index:9;bottom:18px;left:50%;transform:translateX(-50%);width:min(850px,calc(100% - 28px));padding:8px;border-radius:24px;display:flex;gap:8px}.composer textarea{flex:1;resize:none;min-height:46px;max-height:140px;border:0;outline:0;background:transparent;padding:13px 12px}.send{width:50px;border-radius:18px;background:var(--accent);color:#080808;font-weight:800}
-.sectionhead{display:flex;justify-content:space-between;align-items:center;margin:20px 0}.sectionhead h2{margin:0;letter-spacing:-.03em}.grid{display:grid;grid-template-columns:repeat(2,1fr);gap:14px}.card{border-radius:22px;padding:20px}.card h3{margin:0 0 8px}.card p{margin:0;color:#aaa;line-height:1.5}.row{display:flex;justify-content:space-between;gap:14px;align-items:center;padding:15px 0;border-bottom:1px solid rgba(255,255,255,.07)}.row:last-child{border-bottom:0}.pill{padding:7px 10px;border-radius:999px;background:rgba(255,255,255,.08);font-size:12px}
-.bottombar{position:fixed;bottom:12px;left:50%;transform:translateX(-50%);z-index:11;border-radius:24px;padding:7px;display:flex;gap:4px}.nav{min-width:76px;padding:10px 13px;border-radius:17px;background:transparent;color:#999;transition:.25s}.nav.active{background:rgba(255,255,255,.13);color:#fff}.nav:hover{transform:translateY(-2px)}
-.empty{text-align:center;padding:12vh 20px}.empty h2{font-size:32px;margin-bottom:8px}.empty p{color:#999;line-height:1.6}.primary{padding:12px 17px;border-radius:16px;background:var(--accent);color:#080808;font-weight:700}
-input[type=range]{width:150px}select{background:#151515;color:#fff;border:1px solid #333;padding:8px;border-radius:10px}
-.danger{color:#ff7777}.tiny{font-size:12px;color:#777}
-@media(max-width:650px){main{width:calc(100% - 20px);padding-top:15px}.suggestions,.grid{grid-template-columns:1fr}.msg{max-width:88%}.nav{min-width:62px;font-size:12px}.hero{padding-top:5vh}.topbar{margin:8px}.bottombar{bottom:8px}}
-</style>
+<title>Adaptive AI — v5 Glass Bugfix</title>
+<style> :root{--accent:#ffffff;--accent-rgb:255,255,255;--glass:.12;--blur:22px;--glass-border:.16}
+*{box-sizing:border-box}html,body{margin:0;min-height:100%;font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display","Segoe UI",sans-serif;background:#050505;color:#f5f5f7}body{overflow-x:hidden}
+body:before,body:after{content:"";position:fixed;pointer-events:none;z-index:-2;border-radius:50%;filter:blur(90px);opacity:.18;transition:background .3s ease}body:before{width:360px;height:360px;left:-120px;top:8%;background:var(--accent)}body:after{width:420px;height:420px;right:-150px;bottom:4%;background:var(--accent)}
+button,input,textarea{font:inherit;color:inherit}button{border:0;cursor:pointer;-webkit-tap-highlight-color:transparent}
+.icon,.primary,.send,.nav,.pill,.suggestion,.chatCard,.composer,.bottombar,.card{position:relative;overflow:hidden;isolation:isolate}
+.icon:before,.primary:before,.send:before,.nav.active:before,.suggestion:before,.chatCard:before,.composer:before,.bottombar:before,.card:before{content:"";position:absolute;inset:1px;border-radius:inherit;pointer-events:none;background:linear-gradient(115deg,rgba(255,255,255,.16),transparent 30%,transparent 68%,rgba(255,255,255,.045));opacity:.9;z-index:-1}
+.icon{width:42px;height:42px;border-radius:14px;background:linear-gradient(145deg,rgba(var(--accent-rgb),.14),rgba(255,255,255,.045));border:1px solid rgba(var(--accent-rgb),.25);backdrop-filter:blur(var(--blur)) saturate(150%);-webkit-backdrop-filter:blur(var(--blur)) saturate(150%);box-shadow:inset 0 1px 0 rgba(255,255,255,.2),0 8px 24px rgba(0,0,0,.25);transition:.25s}.icon:hover{transform:translateY(-2px) scale(1.03)}
+.floatingSettings{position:fixed;top:16px;right:16px;z-index:50}
+main{width:min(1000px,calc(100% - 28px));margin:0 auto;padding:28px 0 150px}.view{display:none!important}.view.active{display:block!important;animation:in .25s ease;position:relative;z-index:1}@keyframes in{from{opacity:0;transform:translateY(7px)}to{opacity:1;transform:none}}
+.hero{text-align:center;padding:7vh 10px 34px}.hero h1{font-size:clamp(38px,8vw,72px);letter-spacing:-.055em;margin:0 0 10px}.hero p{color:#a9a9af;font-size:16px;margin:0 auto 26px;max-width:570px;line-height:1.6}.suggestions{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}.suggestion{text-align:left;padding:18px;border-radius:20px;background:linear-gradient(145deg,rgba(255,255,255,calc(var(--glass) + .035)),rgba(255,255,255,var(--glass)));border:1px solid rgba(var(--accent-rgb),.16);backdrop-filter:blur(var(--blur)) saturate(145%);-webkit-backdrop-filter:blur(var(--blur)) saturate(145%);box-shadow:inset 0 1px 0 rgba(255,255,255,.16),0 16px 45px rgba(0,0,0,.25);transition:.22s}.suggestion:hover{transform:translateY(-3px)}.suggestion b{display:block;margin-bottom:6px}.muted{color:#96969d}
+.card{border-radius:22px;padding:20px;background:linear-gradient(145deg,rgba(255,255,255,calc(var(--glass) + .035)),rgba(255,255,255,var(--glass)));border:1px solid rgba(var(--accent-rgb),.16);backdrop-filter:blur(var(--blur)) saturate(145%);-webkit-backdrop-filter:blur(var(--blur)) saturate(145%);box-shadow:inset 0 1px 0 rgba(255,255,255,.14),0 16px 45px rgba(0,0,0,.23)}
+.chat{display:flex;flex-direction:column;gap:14px;min-height:58vh;padding:10px 0 120px}.msg{max-width:min(78%,720px);padding:14px 17px;border-radius:20px;line-height:1.55;white-space:pre-wrap;position:relative}.msg.user{align-self:flex-end;background:linear-gradient(145deg,rgba(var(--accent-rgb),.96),rgba(var(--accent-rgb),.68));color:#080808;border:1px solid rgba(var(--accent-rgb),.8);box-shadow:inset 0 1px 0 rgba(255,255,255,.55),0 10px 30px rgba(var(--accent-rgb),.14)}.msg.ai{align-self:flex-start;background:linear-gradient(145deg,rgba(255,255,255,calc(var(--glass) + .02)),rgba(255,255,255,.055));border:1px solid rgba(255,255,255,.11);backdrop-filter:blur(var(--blur));-webkit-backdrop-filter:blur(var(--blur));border-bottom-left-radius:7px}
+.composer{position:fixed;z-index:30;bottom:82px;left:50%;transform:translateX(-50%);width:min(850px,calc(100% - 28px));padding:8px;border-radius:24px;display:flex;gap:8px;background:linear-gradient(145deg,rgba(255,255,255,calc(var(--glass) + .05)),rgba(255,255,255,var(--glass)));border:1px solid rgba(var(--accent-rgb),.22);backdrop-filter:blur(var(--blur)) saturate(150%);-webkit-backdrop-filter:blur(var(--blur)) saturate(150%);box-shadow:inset 0 1px 0 rgba(255,255,255,.2),0 18px 55px rgba(0,0,0,.4)}.composer textarea{flex:1;resize:none;min-height:46px;max-height:140px;border:0;outline:0;background:transparent;padding:13px 12px}.send{width:50px;border-radius:18px;background:linear-gradient(145deg,rgba(var(--accent-rgb),.96),rgba(var(--accent-rgb),.68));color:#080808;font-weight:800;border:1px solid rgba(var(--accent-rgb),.8);box-shadow:inset 0 1px 0 rgba(255,255,255,.55),0 8px 22px rgba(var(--accent-rgb),.16)}
+.sectionhead{display:flex;justify-content:space-between;align-items:center;margin:20px 0}.sectionhead h2{margin:0;letter-spacing:-.03em}.grid{display:grid;grid-template-columns:repeat(2,1fr);gap:14px}.row{display:flex;justify-content:space-between;gap:14px;align-items:center;padding:15px 0;border-bottom:1px solid rgba(255,255,255,.07)}.row:last-child{border-bottom:0}.pill{padding:8px 12px;border-radius:999px;background:linear-gradient(145deg,rgba(var(--accent-rgb),.15),rgba(255,255,255,.055));border:1px solid rgba(var(--accent-rgb),.2);backdrop-filter:blur(calc(var(--blur)*.7));-webkit-backdrop-filter:blur(calc(var(--blur)*.7));box-shadow:inset 0 1px 0 rgba(255,255,255,.16)}
+.bottombar{position:fixed;bottom:12px;left:50%;transform:translateX(-50%);z-index:40;border-radius:24px;padding:7px;display:flex;gap:4px;background:linear-gradient(145deg,rgba(255,255,255,.19),rgba(255,255,255,.075));border:1px solid rgba(var(--accent-rgb),.22);backdrop-filter:blur(var(--blur)) saturate(155%);-webkit-backdrop-filter:blur(var(--blur)) saturate(155%);box-shadow:inset 0 1px 0 rgba(255,255,255,.2),0 16px 45px rgba(0,0,0,.4)}.nav{min-width:76px;padding:10px 13px;border-radius:17px;background:transparent;color:#aaa;transition:.25s;z-index:1}.nav.active{background:linear-gradient(145deg,rgba(var(--accent-rgb),.24),rgba(var(--accent-rgb),.1));color:var(--accent);box-shadow:inset 0 1px 0 rgba(255,255,255,.22),0 6px 18px rgba(var(--accent-rgb),.12)}.nav:hover{transform:translateY(-2px);color:var(--accent)}
+.empty{text-align:center;padding:12vh 20px}.empty h2{font-size:32px;margin-bottom:8px}.empty p{color:#999;line-height:1.6}.primary{padding:12px 18px;border-radius:16px;background:linear-gradient(145deg,rgba(var(--accent-rgb),.96),rgba(var(--accent-rgb),.68));color:#080808;font-weight:700;border:1px solid rgba(var(--accent-rgb),.85);box-shadow:inset 0 1px 0 rgba(255,255,255,.6),0 9px 28px rgba(var(--accent-rgb),.16);transition:.22s}.primary:hover{transform:translateY(-2px)}
+input[type=color]{width:90px;height:42px;padding:3px;border-radius:10px;background:rgba(255,255,255,.06);border:1px solid rgba(var(--accent-rgb),.22)}input[type=range]{width:180px;accent-color:var(--accent)}select{background:#151515;color:#fff;border:1px solid #333;padding:8px;border-radius:10px}.danger{color:#ff7777}.tiny{font-size:12px;color:#777}
+@media(max-width:650px){main{width:calc(100% - 20px);padding-top:12px;padding-bottom:150px}.suggestions,.grid{grid-template-columns:1fr}.msg{max-width:88%}.nav{min-width:62px;font-size:12px}.hero{padding-top:5vh}.composer{bottom:82px;width:calc(100% - 20px)}.bottombar{bottom:8px;max-width:calc(100% - 20px);width:max-content}.chat{padding-bottom:120px}.floatingSettings{top:12px;right:12px}}
+@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}</style>
 </head>
 <body>
 <div class="app">
-<header class="topbar">
-  <div class="brand"><div class="orb"></div><span>Adaptive AI</span></div>
-  <button class="icon" id="quickSettings" aria-label="Settings">⚙</button>
-</header>
-
+<button class="icon floatingSettings" id="quickSettings" aria-label="Settings">⚙</button>
 <main>
 <section id="home" class="view active">
   <div class="hero">
@@ -184,7 +172,8 @@ function renderSettings(){
  document.getElementById('accent').value=data.accent;document.getElementById('opacity').value=data.opacity;document.getElementById('blur').value=data.blur;
 }
 ['accent','opacity','blur'].forEach(id=>document.getElementById(id).addEventListener('input',e=>{data[id]=id==='accent'?e.target.value:Number(e.target.value);applyTheme();save()}));
-function applyTheme(){document.documentElement.style.setProperty('--accent',data.accent);document.documentElement.style.setProperty('--glass',data.opacity);document.documentElement.style.setProperty('--blur',data.blur+'px')}
+function hexToRgb(hex){const m=String(hex).replace('#','');const n=parseInt(m,16);return [(n>>16)&255,(n>>8)&255,n&255]}
+function applyTheme(){const [r,g,b]=hexToRgb(data.accent);document.documentElement.style.setProperty('--accent',data.accent);document.documentElement.style.setProperty('--accent-rgb',`${r},${g},${b}`);document.documentElement.style.setProperty('--glass',data.opacity);document.documentElement.style.setProperty('--blur',data.blur+'px')}
 function renderAll(){applyTheme();renderChats();renderMemory();renderSettings()}
 function esc(s){return String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]))}
 document.getElementById('prompt').addEventListener('keydown',e=>{if(e.key==='Enter'&&!e.shiftKey){e.preventDefault();send()}});
