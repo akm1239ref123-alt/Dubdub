@@ -110,8 +110,19 @@ function show(id){
  document.getElementById('composer').style.display=id==='chatView'?'flex':'none';
  if(id==='chats') renderChats(); if(id==='memory') renderMemory(); if(id==='settings') renderSettings();
 }
-document.querySelectorAll('.nav').forEach(n=>n.onclick=()=>show(n.dataset.view));
-document.getElementById('quickSettings').onclick=()=>show('settings');
+
+function setupNavigation(){
+ document.querySelectorAll('.nav').forEach(n=>{
+   n.onclick=function(e){
+     e.preventDefault();
+     show(this.dataset.view);
+   };
+ });
+ document.getElementById('quickSettings').onclick=function(e){
+   e.preventDefault();
+   show('settings');
+ };
+}
 
 function newChat(){
  const c={id:Date.now(),title:'New chat',messages:[],created:Date.now()};
@@ -122,7 +133,7 @@ function renderChats(){
  const list=document.getElementById('chatList'), empty=document.getElementById('chatEmpty');
  list.innerHTML='';
  empty.style.display=data.chats.length?'none':'block';
- data.chats.forEach(c=>{const el=document.createElement('button');el.className='card';el.style.textAlign='left';el.innerHTML='<h3>'+esc(c.title)+'</h3><p>'+esc(c.messages.at(-1)?.text||'Empty conversation')+'</p>';el.onclick=()=>openChat(c.id);list.appendChild(el)});
+ data.chats.forEach(c=>{const el=document.createElement('button');el.className='card';el.style.textAlign='left';el.innerHTML='<h3>'+esc(c.title)+'</h3><p>'+esc(c.messages.at(-1)?.text||'Empty conversation')+'</p>';el.onclick=function(e){e.preventDefault();openChat(c.id)};list.appendChild(el)});
 }
 function renderMessages(){
  const c=data.chats.find(x=>x.id===data.active), box=document.getElementById('messages');box.innerHTML='';
@@ -235,9 +246,10 @@ function renderSettings(){
 ['accent','opacity','blur'].forEach(id=>document.getElementById(id).addEventListener('input',e=>{data[id]=id==='accent'?e.target.value:Number(e.target.value);applyTheme();save()}));
 function hexToRgb(hex){const m=String(hex).replace('#','');const n=parseInt(m,16);return [(n>>16)&255,(n>>8)&255,n&255]}
 function applyTheme(){const [r,g,b]=hexToRgb(data.accent);document.documentElement.style.setProperty('--accent',data.accent);document.documentElement.style.setProperty('--accent-rgb',`${r},${g},${b}`);document.documentElement.style.setProperty('--glass',data.opacity);document.documentElement.style.setProperty('--blur',data.blur+'px')}
-function renderAll(){applyTheme();renderChats();renderMemory();renderSettings()}
-function esc(s){return String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','\"':'&quot;',\"'\":'&#39;'}[c]))}
+function renderAll(){applyTheme();renderChats();renderMemory();renderSettings();setupNavigation()}
+function esc(s){return String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]))}
 document.getElementById('prompt').addEventListener('keydown',e=>{if(e.key==='Enter'&&!e.shiftKey){e.preventDefault();send()}});
+setupNavigation();
 renderAll();
 </script>
 </body>
