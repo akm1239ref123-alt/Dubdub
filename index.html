@@ -6,11 +6,11 @@
 <meta name="theme-color" content="#050505">
 <title>Adaptive AI — v5 Glass Bugfix</title>
 <style> :root{--accent:#ffffff;--accent-rgb:255,255,255;--glass:.12;--blur:22px;--glass-border:.16}
-*{box-sizing:border-box}html,body{margin:0;min-height:100%;font-family:-apple-system,BlinkMacSystemFont,\"SF Pro Display\",\"Segoe UI\",sans-serif;background:#050505;color:#f5f5f7}body{overflow-x:hidden}
-body:before,body:after{content:\"\";position:fixed;pointer-events:none;z-index:-2;border-radius:50%;filter:blur(90px);opacity:.18;transition:background .3s ease}body:before{width:360px;height:360px;left:-120px;top:8%;background:var(--accent)}body:after{width:420px;height:420px;right:-150px;bottom:4%;background:var(--accent)}
+*{box-sizing:border-box}html,body{margin:0;min-height:100%;font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display","Segoe UI",sans-serif;background:#050505;color:#f5f5f7}body{overflow-x:hidden}
+body:before,body:after{content:"";position:fixed;pointer-events:none;z-index:-2;border-radius:50%;filter:blur(90px);opacity:.18;transition:background .3s ease}body:before{width:360px;height:360px;left:-120px;top:8%;background:var(--accent)}body:after{width:420px;height:420px;right:-150px;bottom:4%;background:var(--accent)}
 button,input,textarea{font:inherit;color:inherit}button{border:0;cursor:pointer;-webkit-tap-highlight-color:transparent}
 .icon,.primary,.send,.nav,.pill,.suggestion,.chatCard,.composer,.bottombar,.card{position:relative;overflow:hidden;isolation:isolate}
-.icon:before,.primary:before,.send:before,.nav.active:before,.suggestion:before,.chatCard:before,.composer:before,.bottombar:before,.card:before{content:\"\";position:absolute;inset:1px;border-radius:inherit;pointer-events:none;background:linear-gradient(115deg,rgba(255,255,255,.16),transparent 30%,transparent 68%,rgba(255,255,255,.045));opacity:.9;z-index:-1}
+.icon:before,.primary:before,.send:before,.nav.active:before,.suggestion:before,.chatCard:before,.composer:before,.bottombar:before,.card:before{content:"";position:absolute;inset:1px;border-radius:inherit;pointer-events:none;background:linear-gradient(115deg,rgba(255,255,255,.16),transparent 30%,transparent 68%,rgba(255,255,255,.045));opacity:.9;z-index:-1}
 .icon{width:42px;height:42px;border-radius:14px;background:linear-gradient(145deg,rgba(var(--accent-rgb),.14),rgba(255,255,255,.045));border:1px solid rgba(var(--accent-rgb),.25);backdrop-filter:blur(var(--blur)) saturate(150%);-webkit-backdrop-filter:blur(var(--blur)) saturate(150%);box-shadow:inset 0 1px 0 rgba(255,255,255,.2),0 8px 24px rgba(0,0,0,.25);transition:.25s}.icon:hover{transform:translateY(-2px) scale(1.03)}
 .floatingSettings{position:fixed;top:16px;right:16px;z-index:50}
 main{width:min(1000px,calc(100% - 28px));margin:0 auto;padding:28px 0 150px}.view{display:none!important}.view.active{display:block!important;animation:in .25s ease;position:relative;z-index:1}@keyframes in{from{opacity:0;transform:translateY(7px)}to{opacity:1;transform:none}}
@@ -19,8 +19,8 @@ main{width:min(1000px,calc(100% - 28px));margin:0 auto;padding:28px 0 150px}.vie
 .chat{display:flex;flex-direction:column;gap:14px;min-height:58vh;padding:10px 0 120px}.msg{max-width:min(78%,720px);padding:14px 17px;border-radius:20px;line-height:1.55;white-space:pre-wrap;position:relative}.msg.user{align-self:flex-end;background:linear-gradient(145deg,rgba(var(--accent-rgb),.96),rgba(var(--accent-rgb),.68));color:#080808;border:1px solid rgba(var(--accent-rgb),.8);box-shadow:inset 0 1px 0 rgba(255,255,255,.55),0 10px 30px rgba(var(--accent-rgb),.14)}.msg.ai{align-self:flex-start;background:linear-gradient(145deg,rgba(255,255,255,calc(var(--glass) + .02)),rgba(255,255,255,.055));border:1px solid rgba(255,255,255,.11);backdrop-filter:blur(var(--blur));-webkit-backdrop-filter:blur(var(--blur));border-bottom-left-radius:7px}
 .composer{position:fixed;z-index:30;bottom:82px;left:50%;transform:translateX(-50%);width:min(850px,calc(100% - 28px));padding:8px;border-radius:24px;display:flex;gap:8px;background:linear-gradient(145deg,rgba(255,255,255,calc(var(--glass) + .05)),rgba(255,255,255,var(--glass)));border:1px solid rgba(var(--accent-rgb),.22);backdrop-filter:blur(var(--blur)) saturate(150%);-webkit-backdrop-filter:blur(var(--blur)) saturate(150%);box-shadow:inset 0 1px 0 rgba(255,255,255,.2),0 18px 55px rgba(0,0,0,.4)}.composer textarea{flex:1;resize:none;min-height:46px;max-height:140px;border:0;outline:0;background:transparent;padding:13px 12px}.send{width:50px;border-radius:18px;background:linear-gradient(145deg,rgba(var(--accent-rgb),.96),rgba(var(--accent-rgb),.68));color:#080808;font-weight:800;border:1px solid rgba(var(--accent-rgb),.8);box-shadow:inset 0 1px 0 rgba(255,255,255,.55),0 8px 22px rgba(var(--accent-rgb),.16)}
 .sectionhead{display:flex;justify-content:space-between;align-items:center;margin:20px 0}.sectionhead h2{margin:0;letter-spacing:-.03em}.grid{display:grid;grid-template-columns:repeat(2,1fr);gap:14px}.row{display:flex;justify-content:space-between;gap:14px;align-items:center;padding:15px 0;border-bottom:1px solid rgba(255,255,255,.07)}.row:last-child{border-bottom:0}.pill{padding:8px 12px;border-radius:999px;background:linear-gradient(145deg,rgba(var(--accent-rgb),.15),rgba(255,255,255,.055));border:1px solid rgba(var(--accent-rgb),.2);backdrop-filter:blur(calc(var(--blur)*.7));-webkit-backdrop-filter:blur(calc(var(--blur)*.7));box-shadow:inset 0 1px 0 rgba(255,255,255,.16)}
-.bottombar{position:fixed;bottom:12px;left:50%;transform:translateX(-50%);z-index:40;border-radius:24px;padding:7px;display:flex;gap:4px;background:linear-gradient(145deg,rgba(255,255,255,.19),rgba(255,255,255,.075));border:1px solid rgba(var(--accent-rgb),.22);backdrop-filter:blur(var(--blur)) saturate(155%);-webkit-backdrop-filter:blur(var(--blur)) saturate(155%);box-shadow:inset 0 1px 0 rgba(255,255,255,.2),0 16px 45px rgba(0,0,0,.4)}.nav{min-width:76px;padding:10px 13px;border-radius:17px;background:transparent;color:#aaa;transition:.25s;z-index:1}.nav.active{background:linear-gradient(145deg,rgba(var(--accent-rgb),.24),rgba(var(--accent-rgb),.1));color:var(--accent);box-shadow:inset 0 1px 0 rgba(255,255,255,.22),0 6px 18px rgba(var(--accent-rgb),.12)}.nav:hover{transform:translateY(-2px);color:var(--accent)}
-.empty{text-align:center;padding:12vh 20px}.empty h2{font-size:32px;margin-bottom:8px}.empty p{color:#999;line-height:1.6}.primary{padding:12px 18px;border-radius:16px;background:linear-gradient(145deg,rgba(var(--accent-rgb),.96),rgba(var(--accent-rgb),.68));color:#080808;font-weight:700;border:1px solid rgba(var(--accent-rgb),.85);box-shadow:inset 0 1px 0 rgba(255,255,255,.6),0 9px 28px rgba(var(--accent-rgb),.16);transition:.22s}.primary:hover{transform:translateY(-2px)}
+.bottombar{position:fixed;bottom:12px;left:50%;transform:translateX(-50%);z-index:40;border-radius:24px;padding:7px;display:flex;gap:4px;background:linear-gradient(145deg,rgba(255,255,255,.19),rgba(255,255,255,.075));border:1px solid rgba(var(--accent-rgb),.22);backdrop-filter:blur(var(--blur)) saturate(155%);-webkit-backdrop-filter:blur(var(--blur)) saturate(155%);box-shadow:inset 0 1px 0 rgba(255,255,255,.2),0 16px 45px rgba(0,0,0,.4)}.nav{min-width:76px;padding:10px 13px;border-radius:17px;background:transparent;color:#aaa;transition:.25s;z-index:1;cursor:pointer}.nav.active{background:linear-gradient(145deg,rgba(var(--accent-rgb),.24),rgba(var(--accent-rgb),.1));color:var(--accent);box-shadow:inset 0 1px 0 rgba(255,255,255,.22),0 6px 18px rgba(var(--accent-rgb),.12)}.nav:hover{transform:translateY(-2px);color:var(--accent)}
+.empty{text-align:center;padding:12vh 20px}.empty h2{font-size:32px;margin-bottom:8px}.empty p{color:#999;line-height:1.6}.primary{padding:12px 18px;border-radius:16px;background:linear-gradient(145deg,rgba(var(--accent-rgb),.96),rgba(var(--accent-rgb),.68));color:#080808;font-weight:700;border:1px solid rgba(var(--accent-rgb),.85);box-shadow:inset 0 1px 0 rgba(255,255,255,.6),0 9px 28px rgba(var(--accent-rgb),.16);transition:.22s;cursor:pointer}.primary:hover{transform:translateY(-2px)}
 input[type=color]{width:90px;height:42px;padding:3px;border-radius:10px;background:rgba(255,255,255,.06);border:1px solid rgba(var(--accent-rgb),.22)}input[type=range]{width:180px;accent-color:var(--accent)}select{background:#151515;color:#fff;border:1px solid #333;padding:8px;border-radius:10px}.danger{color:#ff7777}.tiny{font-size:12px;color:#777}
 @media(max-width:650px){main{width:calc(100% - 20px);padding-top:12px;padding-bottom:150px}.suggestions,.grid{grid-template-columns:1fr}.msg{max-width:88%}.nav{min-width:62px;font-size:12px}.hero{padding-top:5vh}.composer{bottom:82px;width:calc(100% - 20px)}.bottombar{bottom:8px;max-width:calc(100% - 20px);width:max-content}.chat{padding-bottom:120px}.floatingSettings{top:12px;right:12px}}
 @media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}</style>
@@ -67,8 +67,8 @@ input[type=color]{width:90px;height:42px;padding:3px;border-radius:10px;backgrou
     <div class="card">
       <h3>Appearance</h3>
       <div class="row"><span>Accent</span><input id="accent" type="color" value="#ffffff"></div>
-      <div class="row"><span>Glass</span><input id="opacity" type="range" min=".05" max=".22" step=".01" value=".11"></div>
-      <div class="row"><span>Blur</span><input id="blur" type="range" min="8" max="40" value="24"></div>
+      <div class="row"><span>Glass</span><input id="opacity" type="range" min="0.05" max="0.22" step="0.01" value="0.12"></div>
+      <div class="row"><span>Blur</span><input id="blur" type="range" min="8" max="40" value="22"></div>
     </div>
     <div class="card">
       <h3>Learning</h3>
@@ -100,144 +100,324 @@ input[type=color]{width:90px;height:42px;padding:3px;border-radius:10px;backgrou
 <script>
 const KEY='adaptive_ai_v4';
 const BACKEND_URL='https://adaptive-ai-brain-v6-production.up.railway.app/api/chat';
-let data=JSON.parse(localStorage.getItem(KEY)||'null')||{chats:[],active:null,learning:true,prefs:{length:'Balanced',tone:'Natural',format:'Clean'},signals:0,accent:'#ffffff',opacity:.11,blur:24};
+let data=JSON.parse(localStorage.getItem(KEY)||'null')||{chats:[],active:null,learning:true,prefs:{length:'Balanced',tone:'Natural',format:'Clean'},signals:0,accent:'#ffffff',opacity:.12,blur:22};
 
-function save(){localStorage.setItem(KEY,JSON.stringify(data));renderAll()}
-function show(id){
- document.querySelectorAll('.view').forEach(v=>v.classList.remove('active'));
- document.getElementById(id).classList.add('active');
- document.querySelectorAll('.nav').forEach(n=>n.classList.toggle('active',n.dataset.view===id || (id==='chatView'&&n.dataset.view==='chats')));
- document.getElementById('composer').style.display=id==='chatView'?'flex':'none';
- if(id==='chats') renderChats(); if(id==='memory') renderMemory(); if(id==='settings') renderSettings();
+function save(){
+  localStorage.setItem(KEY,JSON.stringify(data));
 }
-document.querySelectorAll('.nav').forEach(n=>n.onclick=()=>show(n.dataset.view));
-document.getElementById('quickSettings').onclick=()=>show('settings');
+
+function show(id){
+  // Hide all views
+  document.querySelectorAll('.view').forEach(v=>v.classList.remove('active'));
+  
+  // Show target view
+  const targetView=document.getElementById(id);
+  if(targetView){
+    targetView.classList.add('active');
+  }
+  
+  // Update nav active state
+  const activeNav=id==='chatView'?'chats':id;
+  document.querySelectorAll('.nav').forEach(n=>{
+    n.classList.toggle('active',n.dataset.view===activeNav);
+  });
+  
+  // Show/hide composer
+  document.getElementById('composer').style.display=id==='chatView'?'flex':'none';
+  
+  // Render content for each view
+  if(id==='chats')renderChats();
+  else if(id==='memory')renderMemory();
+  else if(id==='settings')renderSettings();
+}
+
+// Nav button click handlers
+document.querySelectorAll('.nav').forEach(n=>{
+  n.addEventListener('click',()=>{
+    show(n.dataset.view);
+  });
+});
+
+// Settings button
+document.getElementById('quickSettings').addEventListener('click',()=>{
+  show('settings');
+});
 
 function newChat(){
- const c={id:Date.now(),title:'New chat',messages:[],created:Date.now()};
- data.chats.unshift(c);data.active=c.id;save();openChat(c.id);
+  const c={id:Date.now(),title:'New chat',messages:[],created:Date.now()};
+  data.chats.unshift(c);
+  data.active=c.id;
+  save();
+  openChat(c.id);
 }
-function openChat(id){data.active=id;const c=data.chats.find(x=>x.id===id);if(!c)return;show('chatView');document.getElementById('chatTitle').textContent=c.title;renderMessages()}
+
+function openChat(id){
+  data.active=id;
+  const c=data.chats.find(x=>x.id===id);
+  if(!c)return;
+  show('chatView');
+  document.getElementById('chatTitle').textContent=c.title;
+  renderMessages();
+}
+
 function renderChats(){
- const list=document.getElementById('chatList'), empty=document.getElementById('chatEmpty');
- list.innerHTML='';
- empty.style.display=data.chats.length?'none':'block';
- data.chats.forEach(c=>{const el=document.createElement('button');el.className='card';el.style.textAlign='left';el.innerHTML='<h3>'+esc(c.title)+'</h3><p>'+esc(c.messages.at(-1)?.text||'Empty conversation')+'</p>';el.onclick=()=>openChat(c.id);list.appendChild(el)});
+  const list=document.getElementById('chatList');
+  const empty=document.getElementById('chatEmpty');
+  list.innerHTML='';
+  
+  if(data.chats.length===0){
+    empty.style.display='block';
+    return;
+  }
+  
+  empty.style.display='none';
+  
+  data.chats.forEach(c=>{
+    const el=document.createElement('button');
+    el.className='card';
+    el.style.textAlign='left';
+    el.style.cursor='pointer';
+    el.innerHTML='<h3>'+esc(c.title)+'</h3><p>'+esc(c.messages.at(-1)?.text||'Empty conversation')+'</p>';
+    el.addEventListener('click',()=>{
+      openChat(c.id);
+    });
+    list.appendChild(el);
+  });
 }
+
 function renderMessages(){
- const c=data.chats.find(x=>x.id===data.active), box=document.getElementById('messages');box.innerHTML='';
- if(!c)return;
- if(!c.messages.length){box.innerHTML='<div class="empty"><h2>What are you working on?</h2><p>Start a conversation. Your interaction patterns can gradually shape the local preference profile.</p></div>';return}
- c.messages.forEach(m=>{const el=document.createElement('div');el.className='msg '+m.role;el.textContent=m.text;box.appendChild(el)});
- box.scrollTop=box.scrollHeight;
+  const c=data.chats.find(x=>x.id===data.active);
+  const box=document.getElementById('messages');
+  box.innerHTML='';
+  
+  if(!c)return;
+  
+  if(!c.messages.length){
+    box.innerHTML='<div class="empty"><h2>What are you working on?</h2><p>Start a conversation. Your interaction patterns can gradually shape the local preference profile.</p></div>';
+    return;
+  }
+  
+  c.messages.forEach(m=>{
+    const el=document.createElement('div');
+    el.className='msg '+m.role;
+    el.textContent=m.text;
+    box.appendChild(el);
+  });
+  
+  box.scrollTop=box.scrollHeight;
 }
-function usePrompt(t){newChat();setTimeout(()=>{document.getElementById('prompt').value=t;send()},50)}
+
+function usePrompt(t){
+  newChat();
+  setTimeout(()=>{
+    document.getElementById('prompt').value=t;
+    send();
+  },50);
+}
+
 function send(){
- const p=document.getElementById('prompt'), text=p.value.trim();if(!text||!data.active)return;
- const c=data.chats.find(x=>x.id===data.active);if(!c)return;
- if(c.messages.length===0)c.title=text.slice(0,34)+(text.length>34?'…':'');
- c.messages.push({role:'user',text});
- p.value='';data.signals++;
- if(data.learning)adapt(text);
- save();renderMessages();document.getElementById('chatTitle').textContent=c.title;
- callBackend(c);
+  const p=document.getElementById('prompt');
+  const text=p.value.trim();
+  
+  if(!text||!data.active)return;
+  
+  const c=data.chats.find(x=>x.id===data.active);
+  if(!c)return;
+  
+  // Set title from first message
+  if(c.messages.length===0){
+    c.title=text.slice(0,34)+(text.length>34?'…':'');
+  }
+  
+  // Add user message
+  c.messages.push({role:'user',text});
+  p.value='';
+  data.signals++;
+  
+  // Adapt learning
+  if(data.learning)adapt(text);
+  
+  // Save and render
+  save();
+  renderMessages();
+  document.getElementById('chatTitle').textContent=c.title;
+  
+  // Call backend
+  callBackend(c);
 }
+
 async function callBackend(chat){
- const payload={
-   messages:chat.messages.map(m=>({role:m.role,content:m.text}))
- };
- 
- try{
-   const response=await fetch(BACKEND_URL,{
-     method:'POST',
-     headers:{'Content-Type':'application/json'},
-     body:JSON.stringify(payload)
-   });
-   
-   if(!response.ok){
-     const err=await response.text();
-     console.error('Backend error:',response.status,err);
-     chat.messages.push({role:'ai',text:'Error: Backend returned '+response.status+'. '+err});
-     save();renderMessages();
-     return;
-   }
-   
-   if(!response.body){
-     chat.messages.push({role:'ai',text:'Error: No response body from backend'});
-     save();renderMessages();
-     return;
-   }
-   
-   const reader=response.body.getReader();
-   const decoder=new TextDecoder();
-   let fullReply='';
-   let aiMsg={role:'ai',text:''};
-   chat.messages.push(aiMsg);
-   
-   try{
-     while(true){
-       const {done,value}=await reader.read();
-       if(done)break;
-       const chunk=decoder.decode(value,{stream:true});
-       const lines=chunk.split('\n');
-       for(const line of lines){
-         if(!line.trim()||!line.startsWith('data:'))continue;
-         const data_str=line.slice(5).trim();
-         if(data_str==='[DONE]')break;
-         try{
-           const evt=JSON.parse(data_str);
-           if(evt.choices&&evt.choices[0]&&evt.choices[0].delta&&evt.choices[0].delta.content){
-             const content=evt.choices[0].delta.content;
-             aiMsg.text+=content;
-             fullReply+=content;
-           }
-         }catch(e){
-           console.warn('Parse error on SSE chunk:',data_str);
-         }
-       }
-     }
-   }finally{
-     reader.cancel();
-   }
-   
-   if(!fullReply){
-     aiMsg.text='Error: Empty response from backend';
-   }
-   
-   save();renderMessages();
- }catch(err){
-   console.error('Fetch error:',err);
-   chat.messages.push({role:'ai',text:'Error: '+err.message});
-   save();renderMessages();
- }
+  const payload={
+    messages:chat.messages.map(m=>({role:m.role,content:m.text}))
+  };
+  
+  try{
+    const response=await fetch(BACKEND_URL,{
+      method:'POST',
+      headers:{'Content-Type':'application/json'},
+      body:JSON.stringify(payload)
+    });
+    
+    if(!response.ok){
+      const err=await response.text();
+      console.error('Backend error:',response.status,err);
+      chat.messages.push({role:'ai',text:'Error: Backend returned '+response.status+'. '+err});
+      save();
+      renderMessages();
+      return;
+    }
+    
+    if(!response.body){
+      chat.messages.push({role:'ai',text:'Error: No response body from backend'});
+      save();
+      renderMessages();
+      return;
+    }
+    
+    const reader=response.body.getReader();
+    const decoder=new TextDecoder();
+    let fullReply='';
+    let aiMsg={role:'ai',text:''};
+    chat.messages.push(aiMsg);
+    
+    try{
+      while(true){
+        const {done,value}=await reader.read();
+        if(done)break;
+        const chunk=decoder.decode(value,{stream:true});
+        const lines=chunk.split('\n');
+        for(const line of lines){
+          if(!line.trim()||!line.startsWith('data:'))continue;
+          const data_str=line.slice(5).trim();
+          if(data_str==='[DONE]')break;
+          try{
+            const evt=JSON.parse(data_str);
+            if(evt.choices&&evt.choices[0]&&evt.choices[0].delta&&evt.choices[0].delta.content){
+              const content=evt.choices[0].delta.content;
+              aiMsg.text+=content;
+              fullReply+=content;
+            }
+          }catch(e){
+            console.warn('Parse error on SSE chunk:',data_str);
+          }
+        }
+      }
+    }finally{
+      reader.cancel();
+    }
+    
+    if(!fullReply){
+      aiMsg.text='Error: Empty response from backend';
+    }
+    
+    save();
+    renderMessages();
+  }catch(err){
+    console.error('Fetch error:',err);
+    chat.messages.push({role:'ai',text:'Error: '+err.message});
+    save();
+    renderMessages();
+  }
 }
+
 function adapt(t){
- const n=t.toLowerCase();
- if(/\b(short|quick|brief|just the answer)\b/.test(n))data.prefs.length='Short';
- else if(/\b(detailed|deep|explain fully|in detail)\b/.test(n))data.prefs.length='Detailed';
- if(/\b(formal|professional)\b/.test(n))data.prefs.tone='Professional';
- else if(/\b(casual|simple|friendly)\b/.test(n))data.prefs.tone='Casual';
+  const n=t.toLowerCase();
+  if(/\b(short|quick|brief|just the answer)\b/.test(n))data.prefs.length='Short';
+  else if(/\b(detailed|deep|explain fully|in detail)\b/.test(n))data.prefs.length='Detailed';
+  if(/\b(formal|professional)\b/.test(n))data.prefs.tone='Professional';
+  else if(/\b(casual|simple|friendly)\b/.test(n))data.prefs.tone='Casual';
 }
+
 function renderMemory(){
- document.getElementById('mLength').textContent=data.prefs.length;
- document.getElementById('mTone').textContent=data.prefs.tone;
- document.getElementById('mFormat').textContent=data.prefs.format;
- document.getElementById('mSignals').textContent=data.signals?data.signals+' interaction signal'+(data.signals===1?'':'s')+' collected locally. Preferences update when you express or demonstrate a preference.':'No interaction data yet.';
+  document.getElementById('mLength').textContent=data.prefs.length;
+  document.getElementById('mTone').textContent=data.prefs.tone;
+  document.getElementById('mFormat').textContent=data.prefs.format;
+  const sig=data.signals;
+  document.getElementById('mSignals').textContent=sig?sig+' interaction signal'+(sig===1?'':'s')+' collected locally. Preferences update when you express or demonstrate a preference.':'No interaction data yet.';
 }
-function toggleLearning(){data.learning=!data.learning;save()}
-function resetLearning(){data.prefs={length:'Balanced',tone:'Natural',format:'Clean'};data.signals=0;save()}
-function clearAll(){if(confirm('Clear all local chats and learning data?')){localStorage.removeItem(KEY);location.reload()}}
+
+function toggleLearning(){
+  data.learning=!data.learning;
+  save();
+  renderSettings();
+}
+
+function resetLearning(){
+  data.prefs={length:'Balanced',tone:'Natural',format:'Clean'};
+  data.signals=0;
+  save();
+  renderMemory();
+}
+
+function clearAll(){
+  if(confirm('Clear all local chats and learning data?')){
+    localStorage.removeItem(KEY);
+    location.reload();
+  }
+}
+
 function renderSettings(){
- document.getElementById('learning').textContent=data.learning?'On':'Off';
- document.getElementById('chatCount').textContent=data.chats.length;
- document.getElementById('accent').value=data.accent;document.getElementById('opacity').value=data.opacity;document.getElementById('blur').value=data.blur;
+  document.getElementById('learning').textContent=data.learning?'On':'Off';
+  document.getElementById('chatCount').textContent=data.chats.length;
+  document.getElementById('accent').value=data.accent;
+  document.getElementById('opacity').value=data.opacity;
+  document.getElementById('blur').value=data.blur;
+  applyTheme();
 }
-['accent','opacity','blur'].forEach(id=>document.getElementById(id).addEventListener('input',e=>{data[id]=id==='accent'?e.target.value:Number(e.target.value);applyTheme();save()}));
-function hexToRgb(hex){const m=String(hex).replace('#','');const n=parseInt(m,16);return [(n>>16)&255,(n>>8)&255,n&255]}
-function applyTheme(){const [r,g,b]=hexToRgb(data.accent);document.documentElement.style.setProperty('--accent',data.accent);document.documentElement.style.setProperty('--accent-rgb',`${r},${g},${b}`);document.documentElement.style.setProperty('--glass',data.opacity);document.documentElement.style.setProperty('--blur',data.blur+'px')}
-function renderAll(){applyTheme();renderChats();renderMemory();renderSettings()}
-function esc(s){return String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','\"':'&quot;',\"'\":'&#39;'}[c]))}
-document.getElementById('prompt').addEventListener('keydown',e=>{if(e.key==='Enter'&&!e.shiftKey){e.preventDefault();send()}});
+
+// Settings input handlers
+document.getElementById('accent').addEventListener('input',e=>{
+  data.accent=e.target.value;
+  applyTheme();
+  save();
+});
+
+document.getElementById('opacity').addEventListener('input',e=>{
+  data.opacity=parseFloat(e.target.value);
+  applyTheme();
+  save();
+});
+
+document.getElementById('blur').addEventListener('input',e=>{
+  data.blur=parseInt(e.target.value,10);
+  applyTheme();
+  save();
+});
+
+function hexToRgb(hex){
+  const m=String(hex).replace('#','');
+  const n=parseInt(m,16);
+  return [(n>>16)&255,(n>>8)&255,n&255];
+}
+
+function applyTheme(){
+  const [r,g,b]=hexToRgb(data.accent);
+  document.documentElement.style.setProperty('--accent',data.accent);
+  document.documentElement.style.setProperty('--accent-rgb',`${r},${g},${b}`);
+  document.documentElement.style.setProperty('--glass',data.opacity);
+  document.documentElement.style.setProperty('--blur',data.blur+'px');
+}
+
+function renderAll(){
+  applyTheme();
+  renderChats();
+  renderMemory();
+  renderSettings();
+}
+
+function esc(s){
+  return String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+}
+
+// Prompt keydown handler
+document.getElementById('prompt').addEventListener('keydown',e=>{
+  if(e.key==='Enter'&&!e.shiftKey){
+    e.preventDefault();
+    send();
+  }
+});
+
+// Initial render
 renderAll();
 </script>
 </body>
