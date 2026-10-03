@@ -3,117 +3,192 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<meta name="theme-color" content="#08090d">
-<meta name="apple-mobile-web-app-capable" content="yes">
-<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-<meta name="apple-mobile-web-app-title" content="Adaptive AI">
+<meta name="theme-color" content="#050505">
 <title>Adaptive AI</title>
 <style>
-:root{--accent:#b9c9ff;--glass:rgba(255,255,255,.065);--blur:26px}
-*{box-sizing:border-box}html,body{margin:0;min-height:100%;font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display","Segoe UI",sans-serif;color:#f5f6fa}
-body{background:#08090d;overflow-x:hidden}
-body:before,body:after{content:"";position:fixed;width:70vw;height:70vw;border-radius:50%;filter:blur(100px);z-index:-2}
-body:before{left:-30vw;top:-35vw;background:var(--accent);opacity:.13}
-body:after{right:-30vw;bottom:-35vw;background:#7569ff;opacity:.10}
-.app{max-width:860px;margin:auto;min-height:100vh;padding:18px 18px 105px}
-.glass{background:var(--glass);border:1px solid rgba(255,255,255,.105);box-shadow:inset 0 1px 0 rgba(255,255,255,.09),0 14px 45px rgba(0,0,0,.24);backdrop-filter:blur(var(--blur)) saturate(135%);-webkit-backdrop-filter:blur(var(--blur)) saturate(135%)}
-.top{height:52px;border-radius:18px;display:flex;align-items:center;justify-content:space-between;padding:6px 7px 6px 14px}
-.brand{font-weight:700;font-size:15px}.brand span{color:var(--accent)}
-.icon{width:38px;height:38px;border:0;border-radius:13px;background:rgba(255,255,255,.06);color:#fff;font-size:17px;cursor:pointer}
-.hero{text-align:center;padding:17vh 10px 6vh}.eyebrow{font-size:12px;color:#929aaa}
-.hero h1{font-size:clamp(38px,10vw,64px);line-height:.98;letter-spacing:-3px;margin:15px 0 12px;font-weight:700}
-.hero h1 span{color:var(--accent)}.hero p{max-width:530px;margin:auto;color:#858d9e;font-size:14px;line-height:1.55}
-.suggestions{display:flex;gap:8px;justify-content:center;flex-wrap:wrap;margin-top:25px}
-.pill{--mx:0px;--my:0px;--s:1;position:relative;transform:translate3d(var(--mx),var(--my),0) scale(var(--s));transition:transform .42s cubic-bezier(.2,.9,.2,1),background .25s,border-color .25s;will-change:transform;padding:10px 13px;border-radius:99px;border:1px solid rgba(255,255,255,.11);background:rgba(255,255,255,.045);color:#dfe3ec;font:inherit;font-size:13px;cursor:pointer;overflow:hidden}
-.pill:after{content:"";position:absolute;inset:-50%;background:radial-gradient(circle at var(--gx,50%) var(--gy,50%),rgba(255,255,255,.22),transparent 24%);opacity:0;transition:opacity .25s;pointer-events:none}
-.pill:hover,.pill:active{--s:1.035;background:rgba(255,255,255,.085);border-color:rgba(255,255,255,.19)}.pill:hover:after,.pill:active:after{opacity:1}
-.composer{position:fixed;left:50%;bottom:65px;transform:translateX(-50%);width:min(760px,calc(100% - 28px));border-radius:21px;padding:7px;display:flex;gap:6px;z-index:5}
-.composer textarea{flex:1;min-width:0;resize:none;max-height:125px;border:0;outline:0;background:transparent;color:#fff;padding:11px;font:inherit;font-size:14px}.composer textarea::placeholder{color:#6f7788}
-.send{--mx:0px;--my:0px;--s:1;transform:translate3d(var(--mx),var(--my),0) scale(var(--s));transition:transform .4s cubic-bezier(.2,.9,.2,1),background .25s;width:43px;height:43px;border:0;border-radius:15px;background:rgba(255,255,255,.09);color:#fff;font-size:18px;cursor:pointer;will-change:transform}
-.send:hover,.send:active{--s:1.06;background:color-mix(in srgb,var(--accent) 24%,rgba(255,255,255,.09))}
-.nav{position:fixed;bottom:12px;left:50%;transform:translateX(-50%);width:min(390px,calc(100% - 34px));height:48px;border-radius:18px;display:flex;align-items:center;justify-content:space-around;z-index:6;padding:3px}
-.nav button{--mx:0px;--my:0px;--s:1;transform:translate3d(var(--mx),var(--my),0) scale(var(--s));transition:transform .4s cubic-bezier(.2,.9,.2,1),color .2s,background .2s;border:0;background:transparent;color:#737b8c;padding:7px 15px;border-radius:14px;font:inherit;font-size:11px;cursor:pointer;will-change:transform}.nav button b{display:block;font-size:16px;font-weight:500}.nav button.active{color:#fff;background:rgba(255,255,255,.065)}
-.panel{position:fixed;inset:0 0 0 auto;width:min(370px,94vw);padding:18px;transform:translateX(105%);transition:.35s cubic-bezier(.2,.8,.2,1);z-index:10;overflow:auto}.panel.open{transform:translateX(0)}.panel h2{font-size:20px;margin:7px 0 24px}.close{float:right}.row{margin:20px 0}.row label{display:flex;justify-content:space-between;align-items:center;color:#bfc5d2;font-size:13px;margin-bottom:9px}.row input[type=range]{width:100%}.row input[type=color]{width:44px;height:32px;border:0;background:none}.styles{display:grid;grid-template-columns:1fr 1fr;gap:7px}.stylebtn{padding:11px;border-radius:13px;border:1px solid rgba(255,255,255,.1);background:rgba(255,255,255,.045);color:#dfe3ec}.stylebtn.active{outline:1px solid var(--accent)}
-
-.hidden{display:none!important}
-.view{min-height:58vh}
-.pageHead{padding:12vh 8px 30px;text-align:center}
-.pageHead h2{font-size:42px;letter-spacing:-2px;margin:10px 0 8px}
-.pageHead p{color:#858d9e;font-size:14px}
-.empty{max-width:430px;margin:0 auto;padding:32px 22px;border-radius:24px;display:flex;flex-direction:column;align-items:center;gap:10px;text-align:center}
-.emptyIcon{font-size:28px;color:var(--accent);margin-bottom:4px}
-.empty span,.memory small{color:#7f8797;font-size:12px}
-.memoryCards{max-width:650px;margin:auto;display:grid;gap:10px}
-.memory{border-radius:20px;padding:17px;display:flex;flex-direction:column;gap:6px}
-.memory span{font-size:12px;color:#858d9e}.memory b{font-size:15px;font-weight:600}
-@media(max-width:600px){.app{padding:10px 13px 95px}.hero{padding-top:14vh}.hero h1{font-size:47px}.composer{bottom:61px}.nav{bottom:9px}}
-@media(prefers-reduced-motion:reduce){*{transition:none!important}}
+:root{--accent:#fff;--glass:.11;--blur:24px;--radius:24px}
+*{box-sizing:border-box}html,body{margin:0;min-height:100%;font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display","Segoe UI",sans-serif;background:#050505;color:#f5f5f7}
+body{overflow-x:hidden}
+body:before,body:after{content:"";position:fixed;pointer-events:none;z-index:-1;border-radius:50%;filter:blur(80px);opacity:.16}
+body:before{width:300px;height:300px;left:-100px;top:10%;background:var(--accent)}
+body:after{width:340px;height:340px;right:-120px;bottom:5%;background:var(--accent)}
+button,input,textarea{font:inherit;color:inherit}
+button{border:0;cursor:pointer}
+.app{min-height:100vh;display:grid;grid-template-rows:auto 1fr auto}
+.topbar,.bottombar,.panel,.composer,.card{background:rgba(255,255,255,var(--glass));border:1px solid rgba(255,255,255,.11);backdrop-filter:blur(var(--blur));-webkit-backdrop-filter:blur(var(--blur));box-shadow:0 18px 60px rgba(0,0,0,.25)}
+.topbar{position:sticky;top:12px;margin:12px;z-index:10;border-radius:20px;padding:12px 14px;display:flex;align-items:center;justify-content:space-between}
+.brand{display:flex;gap:10px;align-items:center;font-weight:700;letter-spacing:-.02em}.orb{width:30px;height:30px;border-radius:10px;background:linear-gradient(145deg,#fff,#777);box-shadow:0 0 25px rgba(255,255,255,.2)}
+.icon{width:42px;height:42px;border-radius:14px;background:rgba(255,255,255,.07);display:grid;place-items:center;border:1px solid rgba(255,255,255,.08);transition:.25s transform,.25s background}.icon:hover{transform:translateY(-2px) scale(1.03);background:rgba(255,255,255,.13)}
+main{width:min(1000px,calc(100% - 28px));margin:0 auto;padding:32px 0 110px}
+.view{display:none}.view.active{display:block;animation:in .35s ease}@keyframes in{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+.hero{text-align:center;padding:7vh 10px 28px}.hero h1{font-size:clamp(38px,8vw,72px);letter-spacing:-.055em;margin:0 0 10px}.hero p{color:#a9a9af;font-size:16px;margin:0 auto 26px;max-width:570px;line-height:1.6}
+.suggestions{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}.suggestion{text-align:left;padding:18px;border-radius:20px}.suggestion b{display:block;margin-bottom:6px}.muted{color:#96969d}
+.chat{display:flex;flex-direction:column;gap:14px;min-height:58vh;padding-bottom:100px}.msg{max-width:min(78%,720px);padding:14px 17px;border-radius:20px;line-height:1.55;white-space:pre-wrap}.msg.user{align-self:flex-end;background:var(--accent);color:#080808;border-bottom-right-radius:7px}.msg.ai{align-self:flex-start;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.08);border-bottom-left-radius:7px}.msg small{display:block;margin-top:8px;opacity:.45;font-size:10px}
+.composer{position:fixed;z-index:9;bottom:18px;left:50%;transform:translateX(-50%);width:min(850px,calc(100% - 28px));padding:8px;border-radius:24px;display:flex;gap:8px}.composer textarea{flex:1;resize:none;min-height:46px;max-height:140px;border:0;outline:0;background:transparent;padding:13px 12px}.send{width:50px;border-radius:18px;background:var(--accent);color:#080808;font-weight:800}
+.sectionhead{display:flex;justify-content:space-between;align-items:center;margin:20px 0}.sectionhead h2{margin:0;letter-spacing:-.03em}.grid{display:grid;grid-template-columns:repeat(2,1fr);gap:14px}.card{border-radius:22px;padding:20px}.card h3{margin:0 0 8px}.card p{margin:0;color:#aaa;line-height:1.5}.row{display:flex;justify-content:space-between;gap:14px;align-items:center;padding:15px 0;border-bottom:1px solid rgba(255,255,255,.07)}.row:last-child{border-bottom:0}.pill{padding:7px 10px;border-radius:999px;background:rgba(255,255,255,.08);font-size:12px}
+.bottombar{position:fixed;bottom:12px;left:50%;transform:translateX(-50%);z-index:11;border-radius:24px;padding:7px;display:flex;gap:4px}.nav{min-width:76px;padding:10px 13px;border-radius:17px;background:transparent;color:#999;transition:.25s}.nav.active{background:rgba(255,255,255,.13);color:#fff}.nav:hover{transform:translateY(-2px)}
+.empty{text-align:center;padding:12vh 20px}.empty h2{font-size:32px;margin-bottom:8px}.empty p{color:#999;line-height:1.6}.primary{padding:12px 17px;border-radius:16px;background:var(--accent);color:#080808;font-weight:700}
+input[type=range]{width:150px}select{background:#151515;color:#fff;border:1px solid #333;padding:8px;border-radius:10px}
+.danger{color:#ff7777}.tiny{font-size:12px;color:#777}
+@media(max-width:650px){main{width:calc(100% - 20px);padding-top:15px}.suggestions,.grid{grid-template-columns:1fr}.msg{max-width:88%}.nav{min-width:62px;font-size:12px}.hero{padding-top:5vh}.topbar{margin:8px}.bottombar{bottom:8px}}
 </style>
 </head>
 <body>
 <div class="app">
-<header class="top glass"><div class="brand">Adaptive <span>AI</span></div><button class="icon" onclick="openSettings()">⚙</button></header>
-<main id="content">
-<section class="view" id="homeView">
-<div class="hero">
-<div class="eyebrow">Personal AI</div>
-<h1>What can I <span>help</span> you with?</h1>
-<p>A calm, customizable AI that adapts to the way you use it.</p>
-<div class="suggestions">
-<button class="pill magnetic" onclick="fill('Explain something simply')">Explain something</button>
-<button class="pill magnetic" onclick="fill('Help me plan my day')">Plan my day</button>
-<button class="pill magnetic" onclick="fill('Teach me something interesting')">Teach me</button>
-</div></div>
+<header class="topbar">
+  <div class="brand"><div class="orb"></div><span>Adaptive AI</span></div>
+  <button class="icon" id="quickSettings" aria-label="Settings">⚙</button>
+</header>
+
+<main>
+<section id="home" class="view active">
+  <div class="hero">
+    <h1>Think. Adapt. Remember.</h1>
+    <p>An AI workspace designed to learn your communication preferences from your interactions — while keeping control in your hands.</p>
+    <button class="primary" onclick="newChat()">Start chatting</button>
+  </div>
+  <div class="suggestions">
+    <button class="card suggestion" onclick="usePrompt('Explain something to me simply')"><b>Explain simply</b><span class="muted">Clear answers with less complexity.</span></button>
+    <button class="card suggestion" onclick="usePrompt('Help me plan something')"><b>Plan with me</b><span class="muted">Turn an idea into practical steps.</span></button>
+    <button class="card suggestion" onclick="usePrompt('Teach me a useful new concept')"><b>Teach me</b><span class="muted">Learn something new interactively.</span></button>
+  </div>
 </section>
-<section class="view hidden" id="chatsView">
-<div class="pageHead"><div class="eyebrow">Conversations</div><h2>Chats</h2><p>Your conversations will appear here.</p></div>
-<div class="empty glass"><div class="emptyIcon">◫</div><strong>No chats yet</strong><span>Start a conversation from Home.</span><button class="pill magnetic" onclick="showView('home')">Start chatting</button></div>
+
+<section id="chats" class="view">
+  <div class="sectionhead"><h2>Chats</h2><button class="primary" onclick="newChat()">＋ New</button></div>
+  <div id="chatList" class="grid"></div>
+  <div id="chatEmpty" class="empty"><h2>No chats yet</h2><p>Your conversations will appear here and stay on this device.</p><button class="primary" onclick="newChat()">Start a chat</button></div>
 </section>
-<section class="view hidden" id="memoryView">
-<div class="pageHead"><div class="eyebrow">Personalization</div><h2>Memory</h2><p>Preferences Adaptive AI can learn from your interactions.</p></div>
-<div class="memoryCards">
-<div class="memory glass"><span>Response style</span><b>Not learned yet</b><small>Your preferences will appear here.</small></div>
-<div class="memory glass"><span>UI preferences</span><b>Liquid Glass</b><small>Stored locally in this prototype.</small></div>
-<div class="memory glass"><span>Learning</span><b>Ready</b><small>Behavior learning will be connected with the AI backend.</small></div>
-</div>
+
+<section id="chatView" class="view">
+  <div class="sectionhead"><h2 id="chatTitle">New chat</h2><button class="icon" onclick="show('chats')">‹</button></div>
+  <div id="messages" class="chat"></div>
+</section>
+
+<section id="memory" class="view">
+  <div class="sectionhead"><h2>Memory</h2><button class="pill" onclick="resetLearning()">Reset learning</button></div>
+  <div class="grid">
+    <div class="card"><h3>Response style</h3><div class="row"><span>Length</span><span class="pill" id="mLength">Balanced</span></div><div class="row"><span>Tone</span><span class="pill" id="mTone">Natural</span></div><div class="row"><span>Formatting</span><span class="pill" id="mFormat">Clean</span></div></div>
+    <div class="card"><h3>Learning signals</h3><p id="mSignals">No interaction data yet. Your choices will gradually shape these preferences.</p></div>
+  </div>
+</section>
+
+<section id="settings" class="view">
+  <div class="sectionhead"><h2>Settings</h2></div>
+  <div class="grid">
+    <div class="card">
+      <h3>Appearance</h3>
+      <div class="row"><span>Accent</span><input id="accent" type="color" value="#ffffff"></div>
+      <div class="row"><span>Glass</span><input id="opacity" type="range" min=".05" max=".22" step=".01" value=".11"></div>
+      <div class="row"><span>Blur</span><input id="blur" type="range" min="8" max="40" value="24"></div>
+    </div>
+    <div class="card">
+      <h3>Learning</h3>
+      <div class="row"><span>Adaptive learning</span><button id="learning" class="pill" onclick="toggleLearning()">On</button></div>
+      <p class="tiny">Learning here is local preference adaptation. It does not infer sensitive traits.</p>
+    </div>
+    <div class="card">
+      <h3>Data</h3>
+      <div class="row"><span>Saved chats</span><span class="pill" id="chatCount">0</span></div>
+      <div class="row"><span>Clear local data</span><button class="pill danger" onclick="clearAll()">Clear</button></div>
+    </div>
+  </div>
 </section>
 </main>
-<div class="composer glass"><textarea id="prompt" rows="1" placeholder="Message Adaptive AI…" oninput="grow(this)"></textarea><button class="send magnetic" onclick="send()">↑</button></div>
-<nav class="nav glass"><button class="active magnetic" onclick="showView('home',this)"><b>⌂</b>Home</button><button class="magnetic" onclick="showView('chats',this)"><b>◫</b>Chats</button><button class="magnetic" onclick="showView('memory',this)"><b>✦</b>Memory</button><button class="magnetic" onclick="openSettings()"><b>⚙</b>Settings</button></nav>
-</div>
-<aside id="panel" class="panel glass"><button class="icon close" onclick="openSettings()">×</button><h2>Appearance</h2>
-<div class="row"><label>Accent color <input id="accent" type="color" value="#b9c9ff"></label></div>
-<div class="row"><label>Glass opacity <span id="ov">7%</span></label><input id="opacity" type="range" min="4" max="18" value="7"></div>
-<div class="row"><label>Blur <span id="bv">26px</span></label><input id="blur" type="range" min="10" max="42" value="26"></div>
-<div class="row"><label>Button style</label><div class="styles"><button class="stylebtn active">Liquid</button><button class="stylebtn">Crystal</button><button class="stylebtn">Bubble</button><button class="stylebtn">Minimal</button></div></div>
-<p style="color:#7f8797;font-size:12px;line-height:1.6">Prototype UI. AI and behavior learning will be connected next.</p></aside>
-<script>
-const root=document.documentElement;
-function openSettings(){panel.classList.toggle('open')}
-function fill(x){prompt.value=x;prompt.focus();grow(prompt)}
-function grow(e){e.style.height='auto';e.style.height=Math.min(e.scrollHeight,125)+'px'}
-function send(){if(!prompt.value.trim())return;alert('Prototype mode — AI backend comes next.\n\nYour message: '+prompt.value)}
-accent.oninput=e=>root.style.setProperty('--accent',e.target.value);
-opacity.oninput=e=>{root.style.setProperty('--glass',`rgba(255,255,255,${e.target.value/100})`);ov.textContent=e.target.value+'%'};
-blur.oninput=e=>{root.style.setProperty('--blur',e.target.value+'px');bv.textContent=e.target.value+'px'};
-document.querySelectorAll('.stylebtn').forEach(b=>b.onclick=()=>{document.querySelectorAll('.stylebtn').forEach(x=>x.classList.remove('active'));b.classList.add('active')});
 
-function showView(name,btn){
-  document.querySelectorAll('.view').forEach(v=>v.classList.add('hidden'));
-  const target=document.getElementById(name+'View');
-  if(target) target.classList.remove('hidden');
-  document.querySelectorAll('.nav button').forEach(b=>b.classList.remove('active'));
-  if(btn) btn.classList.add('active');
-  else {
-    const labels={home:'⌂',chats:'◫',memory:'✦'};
-    document.querySelectorAll('.nav button').forEach(b=>{if(b.textContent.includes(labels[name])) b.classList.add('active')});
-  }
-  window.scrollTo({top:0,behavior:'smooth'});
+<div id="composer" class="composer" style="display:none">
+  <textarea id="prompt" placeholder="Message Adaptive AI…" rows="1"></textarea>
+  <button class="send" onclick="send()">↑</button>
+</div>
+
+<nav class="bottombar">
+ <button class="nav active" data-view="home">Home</button>
+ <button class="nav" data-view="chats">Chats</button>
+ <button class="nav" data-view="memory">Memory</button>
+ <button class="nav" data-view="settings">Settings</button>
+</nav>
+</div>
+
+<script>
+const KEY='adaptive_ai_v4';
+let data=JSON.parse(localStorage.getItem(KEY)||'null')||{chats:[],active:null,learning:true,prefs:{length:'Balanced',tone:'Natural',format:'Clean'},signals:0,accent:'#ffffff',opacity:.11,blur:24};
+
+function save(){localStorage.setItem(KEY,JSON.stringify(data));renderAll()}
+function show(id){
+ document.querySelectorAll('.view').forEach(v=>v.classList.remove('active'));
+ document.getElementById(id).classList.add('active');
+ document.querySelectorAll('.nav').forEach(n=>n.classList.toggle('active',n.dataset.view===id || (id==='chatView'&&n.dataset.view==='chats')));
+ document.getElementById('composer').style.display=id==='chatView'?'flex':'none';
+ if(id==='chats') renderChats(); if(id==='memory') renderMemory(); if(id==='settings') renderSettings();
 }
-document.querySelectorAll('.magnetic').forEach(el=>{
- const move=e=>{const p=e.touches?e.touches[0]:e,r=el.getBoundingClientRect(),x=p.clientX-r.left,y=p.clientY-r.top,dx=(x-r.width/2)/(r.width/2),dy=(y-r.height/2)/(r.height/2),strength=matchMedia('(pointer:coarse)').matches?5:7;if(Math.abs(dx)>1.35||Math.abs(dy)>1.35)return;el.style.setProperty('--mx',(dx*strength).toFixed(2)+'px');el.style.setProperty('--my',(dy*strength).toFixed(2)+'px');el.style.setProperty('--gx',x/r.width*100+'%');el.style.setProperty('--gy',y/r.height*100+'%')};
- const reset=()=>{el.style.setProperty('--mx','0px');el.style.setProperty('--my','0px')};
- el.addEventListener('pointermove',move,{passive:true});el.addEventListener('pointerleave',reset);el.addEventListener('touchmove',move,{passive:true});el.addEventListener('touchend',reset);
-});
+document.querySelectorAll('.nav').forEach(n=>n.onclick=()=>show(n.dataset.view));
+document.getElementById('quickSettings').onclick=()=>show('settings');
+
+function newChat(){
+ const c={id:Date.now(),title:'New chat',messages:[],created:Date.now()};
+ data.chats.unshift(c);data.active=c.id;save();openChat(c.id);
+}
+function openChat(id){data.active=id;const c=data.chats.find(x=>x.id===id);if(!c)return;show('chatView');document.getElementById('chatTitle').textContent=c.title;renderMessages()}
+function renderChats(){
+ const list=document.getElementById('chatList'), empty=document.getElementById('chatEmpty');
+ list.innerHTML='';
+ empty.style.display=data.chats.length?'none':'block';
+ data.chats.forEach(c=>{const el=document.createElement('button');el.className='card';el.style.textAlign='left';el.innerHTML='<h3>'+esc(c.title)+'</h3><p>'+esc(c.messages.at(-1)?.text||'Empty conversation')+'</p>';el.onclick=()=>openChat(c.id);list.appendChild(el)});
+}
+function renderMessages(){
+ const c=data.chats.find(x=>x.id===data.active), box=document.getElementById('messages');box.innerHTML='';
+ if(!c)return;
+ if(!c.messages.length){box.innerHTML='<div class="empty"><h2>What are you working on?</h2><p>Start a conversation. Your interaction patterns can gradually shape the local preference profile.</p></div>';return}
+ c.messages.forEach(m=>{const el=document.createElement('div');el.className='msg '+m.role;el.textContent=m.text;box.appendChild(el)});
+ box.scrollTop=box.scrollHeight;
+}
+function usePrompt(t){newChat();setTimeout(()=>{document.getElementById('prompt').value=t;send()},50)}
+function send(){
+ const p=document.getElementById('prompt'), text=p.value.trim();if(!text||!data.active)return;
+ const c=data.chats.find(x=>x.id===data.active);if(!c)return;
+ if(c.messages.length===0)c.title=text.slice(0,34)+(text.length>34?'…':'');
+ c.messages.push({role:'user',text});
+ p.value='';data.signals++;
+ if(data.learning)adapt(text);
+ const reply=generateReply(text);
+ c.messages.push({role:'ai',text:reply});
+ save();renderMessages();document.getElementById('chatTitle').textContent=c.title;
+}
+function generateReply(t){
+ const x=t.toLowerCase();
+ if(x.includes('hello')||x.includes('hi'))return 'Hey! I’m Adaptive AI. Tell me what you want to work on.';
+ if(x.includes('plan'))return 'Absolutely. Tell me the goal, your deadline, and any limits you have. I’ll turn it into a clear plan.';
+ if(x.includes('explain'))return 'Sure. I’ll keep the explanation clear and practical. Tell me the topic and I’ll break it down step by step.';
+ if(x.includes('teach'))return 'Let’s learn it interactively. Give me the subject and I’ll start with the core idea, then examples and a quick check.';
+ return data.prefs.length==='Short' ? 'Got it. Tell me a little more and I’ll keep the answer concise.' : 'Got it. I can help with that. Give me a little more context and I’ll work through it with you.';
+}
+function adapt(t){
+ const n=t.toLowerCase();
+ if(/\b(short|quick|brief|just the answer)\b/.test(n))data.prefs.length='Short';
+ else if(/\b(detailed|deep|explain fully|in detail)\b/.test(n))data.prefs.length='Detailed';
+ if(/\b(formal|professional)\b/.test(n))data.prefs.tone='Professional';
+ else if(/\b(casual|simple|friendly)\b/.test(n))data.prefs.tone='Casual';
+}
+function renderMemory(){
+ document.getElementById('mLength').textContent=data.prefs.length;
+ document.getElementById('mTone').textContent=data.prefs.tone;
+ document.getElementById('mFormat').textContent=data.prefs.format;
+ document.getElementById('mSignals').textContent=data.signals?data.signals+' interaction signal'+(data.signals===1?'':'s')+' collected locally. Preferences update when you express or demonstrate a preference.':'No interaction data yet.';
+}
+function toggleLearning(){data.learning=!data.learning;save()}
+function resetLearning(){data.prefs={length:'Balanced',tone:'Natural',format:'Clean'};data.signals=0;save()}
+function clearAll(){if(confirm('Clear all local chats and learning data?')){localStorage.removeItem(KEY);location.reload()}}
+function renderSettings(){
+ document.getElementById('learning').textContent=data.learning?'On':'Off';
+ document.getElementById('chatCount').textContent=data.chats.length;
+ document.getElementById('accent').value=data.accent;document.getElementById('opacity').value=data.opacity;document.getElementById('blur').value=data.blur;
+}
+['accent','opacity','blur'].forEach(id=>document.getElementById(id).addEventListener('input',e=>{data[id]=id==='accent'?e.target.value:Number(e.target.value);applyTheme();save()}));
+function applyTheme(){document.documentElement.style.setProperty('--accent',data.accent);document.documentElement.style.setProperty('--glass',data.opacity);document.documentElement.style.setProperty('--blur',data.blur+'px')}
+function renderAll(){applyTheme();renderChats();renderMemory();renderSettings()}
+function esc(s){return String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]))}
+document.getElementById('prompt').addEventListener('keydown',e=>{if(e.key==='Enter'&&!e.shiftKey){e.preventDefault();send()}});
+renderAll();
 </script>
-</body></html>
+</body>
+</html>

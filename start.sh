@@ -1,2 +1,3 @@
 #!/bin/sh
-exec python3 -m http.server "${PORT:-8080}" --bind 0.0.0.0
+PORT=${PORT:-3000}
+python3 -m http.server "$PORT" --bind 0.0.0.0
