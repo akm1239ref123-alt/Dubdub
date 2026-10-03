@@ -1,4 +1,4 @@
-# Adaptive AI v4
+# Adaptive AI v5
 
 New functional frontend prototype:
 - Home / Chats / Memory / Settings
