@@ -1,0 +1,20 @@
+{
+  "name": "adaptive-ai-v6",
+  "version": "6.0.0",
+  "description": "Adaptive AI with real backend LLM integration",
+  "type": "module",
+  "main": "index.html",
+  "scripts": {
+    "dev": "bun run --hot backend-api.ts",
+    "build": "echo 'Static frontend - no build needed'",
+    "start": "bun backend-api.ts"
+  },
+  "dependencies": {
+    "hono": "^4.0.0"
+  },
+  "devDependencies": {},
+  "engines": {
+    "bun": ">=1.0.0"
+  }
+}
+
