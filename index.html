@@ -3,69 +3,117 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<meta name="theme-color" content="#080a10">
+<meta name="theme-color" content="#08090d">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <meta name="apple-mobile-web-app-title" content="Adaptive AI">
 <title>Adaptive AI</title>
 <style>
-:root{--accent:#8ab4ff;--opacity:.24;--blur:22px;--glow:.32}
-*{box-sizing:border-box}html,body{margin:0;min-height:100%;font-family:Inter,system-ui,-apple-system,Segoe UI,sans-serif;color:#f4f7ff}
-body{background:#07090e;overflow-x:hidden}
-body:before,body:after{content:"";position:fixed;width:55vw;height:55vw;border-radius:50%;filter:blur(70px);opacity:.35;z-index:-2}
-body:before{background:var(--accent);top:-28vw;left:-18vw}body:after{background:#6c4dff;right:-25vw;bottom:-30vw}
-.app{max-width:900px;margin:auto;min-height:100vh;padding:18px 16px 110px}
-.glass{background:color-mix(in srgb,var(--accent) 8%,rgba(20,23,31,var(--opacity)));border:1px solid rgba(255,255,255,.14);box-shadow:inset 0 1px 0 rgba(255,255,255,.2),0 18px 60px rgba(0,0,0,.35),0 0 45px color-mix(in srgb,var(--accent) calc(var(--glow)*100%),transparent);backdrop-filter:blur(var(--blur)) saturate(150%);-webkit-backdrop-filter:blur(var(--blur)) saturate(150%)}
-.top{height:62px;border-radius:22px;display:flex;align-items:center;justify-content:space-between;padding:8px 10px 8px 16px}
-.brand{font-weight:800;letter-spacing:.2px}.brand span{color:var(--accent)}
-.icon{width:44px;height:44px;border-radius:15px;border:1px solid rgba(255,255,255,.15);background:rgba(255,255,255,.07);color:#fff;font-size:20px}
-.hero{text-align:center;padding:16vh 10px 7vh}.eyebrow{display:inline-block;padding:7px 12px;border-radius:99px;font-size:12px;background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.12);color:#cdd7ef}.hero h1{font-size:clamp(36px,9vw,68px);line-height:.98;margin:18px 0 14px;letter-spacing:-2.5px}.hero h1 span{color:var(--accent)}.hero p{max-width:620px;margin:auto;color:#aeb7cb;line-height:1.6}
-.suggestions{display:flex;flex-wrap:wrap;gap:9px;justify-content:center;margin:28px auto;max-width:700px}.pill,.send,.stylebtn{border:1px solid rgba(255,255,255,.15);color:#fff;background:rgba(255,255,255,.07);cursor:pointer}.pill{padding:11px 14px;border-radius:99px}.pill:hover,.send:hover{border-color:color-mix(in srgb,var(--accent) 70%,white);box-shadow:0 0 22px color-mix(in srgb,var(--accent) 28%,transparent)}
-.composer{position:fixed;left:50%;bottom:72px;transform:translateX(-50%);width:min(850px,calc(100% - 24px));border-radius:25px;padding:9px;display:flex;gap:8px;z-index:5}.composer textarea{flex:1;min-width:0;resize:none;max-height:130px;border:0;outline:0;background:transparent;color:#fff;padding:13px 11px;font:inherit}.composer textarea::placeholder{color:#8993a8}.send{width:48px;height:48px;border-radius:17px;background:color-mix(in srgb,var(--accent) 24%,rgba(255,255,255,.06));font-size:20px}
-.nav{position:fixed;bottom:14px;left:50%;transform:translateX(-50%);width:min(470px,calc(100% - 28px));height:54px;border-radius:20px;display:flex;align-items:center;justify-content:space-around;z-index:6}.nav button{border:0;background:transparent;color:#9ca7bc;padding:9px 14px;border-radius:14px}.nav button.active{color:#fff;background:rgba(255,255,255,.09)}
-.panel{position:fixed;inset:0 0 0 auto;width:min(390px,94vw);padding:18px;transform:translateX(105%);transition:.3s;z-index:10;overflow:auto}.panel.open{transform:translateX(0)}.panel h2{margin-top:8px}.close{float:right}.row{margin:18px 0}.row label{display:flex;justify-content:space-between;color:#cbd3e4;font-size:14px;margin-bottom:9px}.row input[type=range]{width:100%}.styles{display:grid;grid-template-columns:1fr 1fr;gap:8px}.stylebtn{padding:12px;border-radius:15px}.stylebtn.active{outline:2px solid var(--accent);background:color-mix(in srgb,var(--accent) 18%,transparent)}
-input[type=color]{width:52px;height:38px;padding:3px;border:0;background:transparent}
-@media(max-width:600px){.app{padding-top:10px}.hero{padding-top:13vh}.hero h1{font-size:46px}.composer{bottom:70px}.nav{bottom:10px}}
+:root{--accent:#b9c9ff;--glass:rgba(255,255,255,.065);--blur:26px}
+*{box-sizing:border-box}html,body{margin:0;min-height:100%;font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display","Segoe UI",sans-serif;color:#f5f6fa}
+body{background:#08090d;overflow-x:hidden}
+body:before,body:after{content:"";position:fixed;width:70vw;height:70vw;border-radius:50%;filter:blur(100px);z-index:-2}
+body:before{left:-30vw;top:-35vw;background:var(--accent);opacity:.13}
+body:after{right:-30vw;bottom:-35vw;background:#7569ff;opacity:.10}
+.app{max-width:860px;margin:auto;min-height:100vh;padding:18px 18px 105px}
+.glass{background:var(--glass);border:1px solid rgba(255,255,255,.105);box-shadow:inset 0 1px 0 rgba(255,255,255,.09),0 14px 45px rgba(0,0,0,.24);backdrop-filter:blur(var(--blur)) saturate(135%);-webkit-backdrop-filter:blur(var(--blur)) saturate(135%)}
+.top{height:52px;border-radius:18px;display:flex;align-items:center;justify-content:space-between;padding:6px 7px 6px 14px}
+.brand{font-weight:700;font-size:15px}.brand span{color:var(--accent)}
+.icon{width:38px;height:38px;border:0;border-radius:13px;background:rgba(255,255,255,.06);color:#fff;font-size:17px;cursor:pointer}
+.hero{text-align:center;padding:17vh 10px 6vh}.eyebrow{font-size:12px;color:#929aaa}
+.hero h1{font-size:clamp(38px,10vw,64px);line-height:.98;letter-spacing:-3px;margin:15px 0 12px;font-weight:700}
+.hero h1 span{color:var(--accent)}.hero p{max-width:530px;margin:auto;color:#858d9e;font-size:14px;line-height:1.55}
+.suggestions{display:flex;gap:8px;justify-content:center;flex-wrap:wrap;margin-top:25px}
+.pill{--mx:0px;--my:0px;--s:1;position:relative;transform:translate3d(var(--mx),var(--my),0) scale(var(--s));transition:transform .42s cubic-bezier(.2,.9,.2,1),background .25s,border-color .25s;will-change:transform;padding:10px 13px;border-radius:99px;border:1px solid rgba(255,255,255,.11);background:rgba(255,255,255,.045);color:#dfe3ec;font:inherit;font-size:13px;cursor:pointer;overflow:hidden}
+.pill:after{content:"";position:absolute;inset:-50%;background:radial-gradient(circle at var(--gx,50%) var(--gy,50%),rgba(255,255,255,.22),transparent 24%);opacity:0;transition:opacity .25s;pointer-events:none}
+.pill:hover,.pill:active{--s:1.035;background:rgba(255,255,255,.085);border-color:rgba(255,255,255,.19)}.pill:hover:after,.pill:active:after{opacity:1}
+.composer{position:fixed;left:50%;bottom:65px;transform:translateX(-50%);width:min(760px,calc(100% - 28px));border-radius:21px;padding:7px;display:flex;gap:6px;z-index:5}
+.composer textarea{flex:1;min-width:0;resize:none;max-height:125px;border:0;outline:0;background:transparent;color:#fff;padding:11px;font:inherit;font-size:14px}.composer textarea::placeholder{color:#6f7788}
+.send{--mx:0px;--my:0px;--s:1;transform:translate3d(var(--mx),var(--my),0) scale(var(--s));transition:transform .4s cubic-bezier(.2,.9,.2,1),background .25s;width:43px;height:43px;border:0;border-radius:15px;background:rgba(255,255,255,.09);color:#fff;font-size:18px;cursor:pointer;will-change:transform}
+.send:hover,.send:active{--s:1.06;background:color-mix(in srgb,var(--accent) 24%,rgba(255,255,255,.09))}
+.nav{position:fixed;bottom:12px;left:50%;transform:translateX(-50%);width:min(390px,calc(100% - 34px));height:48px;border-radius:18px;display:flex;align-items:center;justify-content:space-around;z-index:6;padding:3px}
+.nav button{--mx:0px;--my:0px;--s:1;transform:translate3d(var(--mx),var(--my),0) scale(var(--s));transition:transform .4s cubic-bezier(.2,.9,.2,1),color .2s,background .2s;border:0;background:transparent;color:#737b8c;padding:7px 15px;border-radius:14px;font:inherit;font-size:11px;cursor:pointer;will-change:transform}.nav button b{display:block;font-size:16px;font-weight:500}.nav button.active{color:#fff;background:rgba(255,255,255,.065)}
+.panel{position:fixed;inset:0 0 0 auto;width:min(370px,94vw);padding:18px;transform:translateX(105%);transition:.35s cubic-bezier(.2,.8,.2,1);z-index:10;overflow:auto}.panel.open{transform:translateX(0)}.panel h2{font-size:20px;margin:7px 0 24px}.close{float:right}.row{margin:20px 0}.row label{display:flex;justify-content:space-between;align-items:center;color:#bfc5d2;font-size:13px;margin-bottom:9px}.row input[type=range]{width:100%}.row input[type=color]{width:44px;height:32px;border:0;background:none}.styles{display:grid;grid-template-columns:1fr 1fr;gap:7px}.stylebtn{padding:11px;border-radius:13px;border:1px solid rgba(255,255,255,.1);background:rgba(255,255,255,.045);color:#dfe3ec}.stylebtn.active{outline:1px solid var(--accent)}
+
+.hidden{display:none!important}
+.view{min-height:58vh}
+.pageHead{padding:12vh 8px 30px;text-align:center}
+.pageHead h2{font-size:42px;letter-spacing:-2px;margin:10px 0 8px}
+.pageHead p{color:#858d9e;font-size:14px}
+.empty{max-width:430px;margin:0 auto;padding:32px 22px;border-radius:24px;display:flex;flex-direction:column;align-items:center;gap:10px;text-align:center}
+.emptyIcon{font-size:28px;color:var(--accent);margin-bottom:4px}
+.empty span,.memory small{color:#7f8797;font-size:12px}
+.memoryCards{max-width:650px;margin:auto;display:grid;gap:10px}
+.memory{border-radius:20px;padding:17px;display:flex;flex-direction:column;gap:6px}
+.memory span{font-size:12px;color:#858d9e}.memory b{font-size:15px;font-weight:600}
+@media(max-width:600px){.app{padding:10px 13px 95px}.hero{padding-top:14vh}.hero h1{font-size:47px}.composer{bottom:61px}.nav{bottom:9px}}
+@media(prefers-reduced-motion:reduce){*{transition:none!important}}
 </style>
 </head>
 <body>
 <div class="app">
 <header class="top glass"><div class="brand">Adaptive <span>AI</span></div><button class="icon" onclick="openSettings()">⚙</button></header>
-<main>
-<section class="hero">
-<div class="eyebrow">Personal AI • Liquid Glass</div>
+<main id="content">
+<section class="view" id="homeView">
+<div class="hero">
+<div class="eyebrow">Personal AI</div>
 <h1>What can I <span>help</span> you with?</h1>
-<p>A glossy, customizable AI chat experience designed to learn your preferences over time.</p>
+<p>A calm, customizable AI that adapts to the way you use it.</p>
 <div class="suggestions">
-<button class="pill" onclick="fill('Explain something simply')">Explain something</button>
-<button class="pill" onclick="fill('Help me plan my day')">Plan my day</button>
-<button class="pill" onclick="fill('Teach me something interesting')">Teach me</button>
+<button class="pill magnetic" onclick="fill('Explain something simply')">Explain something</button>
+<button class="pill magnetic" onclick="fill('Help me plan my day')">Plan my day</button>
+<button class="pill magnetic" onclick="fill('Teach me something interesting')">Teach me</button>
+</div></div>
+</section>
+<section class="view hidden" id="chatsView">
+<div class="pageHead"><div class="eyebrow">Conversations</div><h2>Chats</h2><p>Your conversations will appear here.</p></div>
+<div class="empty glass"><div class="emptyIcon">◫</div><strong>No chats yet</strong><span>Start a conversation from Home.</span><button class="pill magnetic" onclick="showView('home')">Start chatting</button></div>
+</section>
+<section class="view hidden" id="memoryView">
+<div class="pageHead"><div class="eyebrow">Personalization</div><h2>Memory</h2><p>Preferences Adaptive AI can learn from your interactions.</p></div>
+<div class="memoryCards">
+<div class="memory glass"><span>Response style</span><b>Not learned yet</b><small>Your preferences will appear here.</small></div>
+<div class="memory glass"><span>UI preferences</span><b>Liquid Glass</b><small>Stored locally in this prototype.</small></div>
+<div class="memory glass"><span>Learning</span><b>Ready</b><small>Behavior learning will be connected with the AI backend.</small></div>
 </div>
 </section>
 </main>
-<div class="composer glass"><textarea id="prompt" rows="1" placeholder="Message Adaptive AI…" oninput="grow(this)"></textarea><button class="send" onclick="send()">↑</button></div>
-<nav class="nav glass"><button class="active">⌂<br><small>Home</small></button><button>◫<br><small>Chats</small></button><button>✦<br><small>Memory</small></button><button onclick="openSettings()">⚙<br><small>Settings</small></button></nav>
+<div class="composer glass"><textarea id="prompt" rows="1" placeholder="Message Adaptive AI…" oninput="grow(this)"></textarea><button class="send magnetic" onclick="send()">↑</button></div>
+<nav class="nav glass"><button class="active magnetic" onclick="showView('home',this)"><b>⌂</b>Home</button><button class="magnetic" onclick="showView('chats',this)"><b>◫</b>Chats</button><button class="magnetic" onclick="showView('memory',this)"><b>✦</b>Memory</button><button class="magnetic" onclick="openSettings()"><b>⚙</b>Settings</button></nav>
 </div>
-<aside id="panel" class="panel glass">
-<button class="icon close" onclick="openSettings()">×</button><h2>Appearance</h2>
-<div class="row"><label>Accent color <input id="accent" type="color" value="#8ab4ff"></label></div>
-<div class="row"><label>Glass opacity <span id="ov">24%</span></label><input id="opacity" type="range" min="10" max="40" value="24"></div>
-<div class="row"><label>Blur <span id="bv">22px</span></label><input id="blur" type="range" min="8" max="40" value="22"></div>
-<div class="row"><label>Glow <span id="gv">32%</span></label><input id="glow" type="range" min="0" max="70" value="32"></div>
+<aside id="panel" class="panel glass"><button class="icon close" onclick="openSettings()">×</button><h2>Appearance</h2>
+<div class="row"><label>Accent color <input id="accent" type="color" value="#b9c9ff"></label></div>
+<div class="row"><label>Glass opacity <span id="ov">7%</span></label><input id="opacity" type="range" min="4" max="18" value="7"></div>
+<div class="row"><label>Blur <span id="bv">26px</span></label><input id="blur" type="range" min="10" max="42" value="26"></div>
 <div class="row"><label>Button style</label><div class="styles"><button class="stylebtn active">Liquid</button><button class="stylebtn">Crystal</button><button class="stylebtn">Bubble</button><button class="stylebtn">Minimal</button></div></div>
-<p style="color:#9da8bc;font-size:13px;line-height:1.6">Prototype only: the visual interface is live. The real AI backend and behavior-learning system will be connected next.</p>
-</aside>
+<p style="color:#7f8797;font-size:12px;line-height:1.6">Prototype UI. AI and behavior learning will be connected next.</p></aside>
 <script>
 const root=document.documentElement;
-function openSettings(){document.getElementById('panel').classList.toggle('open')}
-function fill(x){const p=document.getElementById('prompt');p.value=x;p.focus();grow(p)}
-function grow(e){e.style.height='auto';e.style.height=Math.min(e.scrollHeight,130)+'px'}
-function send(){const p=document.getElementById('prompt');if(!p.value.trim())return;alert('Prototype mode — AI backend comes next.\\n\\nYour message: '+p.value)}
+function openSettings(){panel.classList.toggle('open')}
+function fill(x){prompt.value=x;prompt.focus();grow(prompt)}
+function grow(e){e.style.height='auto';e.style.height=Math.min(e.scrollHeight,125)+'px'}
+function send(){if(!prompt.value.trim())return;alert('Prototype mode — AI backend comes next.\n\nYour message: '+prompt.value)}
 accent.oninput=e=>root.style.setProperty('--accent',e.target.value);
-opacity.oninput=e=>{root.style.setProperty('--opacity',e.target.value/100);ov.textContent=e.target.value+'%'};
+opacity.oninput=e=>{root.style.setProperty('--glass',`rgba(255,255,255,${e.target.value/100})`);ov.textContent=e.target.value+'%'};
 blur.oninput=e=>{root.style.setProperty('--blur',e.target.value+'px');bv.textContent=e.target.value+'px'};
-glow.oninput=e=>{root.style.setProperty('--glow',e.target.value/100);gv.textContent=e.target.value+'%'};
 document.querySelectorAll('.stylebtn').forEach(b=>b.onclick=()=>{document.querySelectorAll('.stylebtn').forEach(x=>x.classList.remove('active'));b.classList.add('active')});
+
+function showView(name,btn){
+  document.querySelectorAll('.view').forEach(v=>v.classList.add('hidden'));
+  const target=document.getElementById(name+'View');
+  if(target) target.classList.remove('hidden');
+  document.querySelectorAll('.nav button').forEach(b=>b.classList.remove('active'));
+  if(btn) btn.classList.add('active');
+  else {
+    const labels={home:'⌂',chats:'◫',memory:'✦'};
+    document.querySelectorAll('.nav button').forEach(b=>{if(b.textContent.includes(labels[name])) b.classList.add('active')});
+  }
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+document.querySelectorAll('.magnetic').forEach(el=>{
+ const move=e=>{const p=e.touches?e.touches[0]:e,r=el.getBoundingClientRect(),x=p.clientX-r.left,y=p.clientY-r.top,dx=(x-r.width/2)/(r.width/2),dy=(y-r.height/2)/(r.height/2),strength=matchMedia('(pointer:coarse)').matches?5:7;if(Math.abs(dx)>1.35||Math.abs(dy)>1.35)return;el.style.setProperty('--mx',(dx*strength).toFixed(2)+'px');el.style.setProperty('--my',(dy*strength).toFixed(2)+'px');el.style.setProperty('--gx',x/r.width*100+'%');el.style.setProperty('--gy',y/r.height*100+'%')};
+ const reset=()=>{el.style.setProperty('--mx','0px');el.style.setProperty('--my','0px')};
+ el.addEventListener('pointermove',move,{passive:true});el.addEventListener('pointerleave',reset);el.addEventListener('touchmove',move,{passive:true});el.addEventListener('touchend',reset);
+});
 </script>
-</body>
-</html>
+</body></html>
