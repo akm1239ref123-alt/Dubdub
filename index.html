@@ -6,11 +6,11 @@
 <meta name="theme-color" content="#050505">
 <title>Adaptive AI — v5 Glass Bugfix</title>
 <style> :root{--accent:#ffffff;--accent-rgb:255,255,255;--glass:.12;--blur:22px;--glass-border:.16}
-*{box-sizing:border-box}html,body{margin:0;min-height:100%;font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display","Segoe UI",sans-serif;background:#050505;color:#f5f5f7}body{overflow-x:hidden}
-body:before,body:after{content:"";position:fixed;pointer-events:none;z-index:-2;border-radius:50%;filter:blur(90px);opacity:.18;transition:background .3s ease}body:before{width:360px;height:360px;left:-120px;top:8%;background:var(--accent)}body:after{width:420px;height:420px;right:-150px;bottom:4%;background:var(--accent)}
+*{box-sizing:border-box}html,body{margin:0;min-height:100%;font-family:-apple-system,BlinkMacSystemFont,\"SF Pro Display\",\"Segoe UI\",sans-serif;background:#050505;color:#f5f5f7}body{overflow-x:hidden}
+body:before,body:after{content:\"\";position:fixed;pointer-events:none;z-index:-2;border-radius:50%;filter:blur(90px);opacity:.18;transition:background .3s ease}body:before{width:360px;height:360px;left:-120px;top:8%;background:var(--accent)}body:after{width:420px;height:420px;right:-150px;bottom:4%;background:var(--accent)}
 button,input,textarea{font:inherit;color:inherit}button{border:0;cursor:pointer;-webkit-tap-highlight-color:transparent}
 .icon,.primary,.send,.nav,.pill,.suggestion,.chatCard,.composer,.bottombar,.card{position:relative;overflow:hidden;isolation:isolate}
-.icon:before,.primary:before,.send:before,.nav.active:before,.suggestion:before,.chatCard:before,.composer:before,.bottombar:before,.card:before{content:"";position:absolute;inset:1px;border-radius:inherit;pointer-events:none;background:linear-gradient(115deg,rgba(255,255,255,.16),transparent 30%,transparent 68%,rgba(255,255,255,.045));opacity:.9;z-index:-1}
+.icon:before,.primary:before,.send:before,.nav.active:before,.suggestion:before,.chatCard:before,.composer:before,.bottombar:before,.card:before{content:\"\";position:absolute;inset:1px;border-radius:inherit;pointer-events:none;background:linear-gradient(115deg,rgba(255,255,255,.16),transparent 30%,transparent 68%,rgba(255,255,255,.045));opacity:.9;z-index:-1}
 .icon{width:42px;height:42px;border-radius:14px;background:linear-gradient(145deg,rgba(var(--accent-rgb),.14),rgba(255,255,255,.045));border:1px solid rgba(var(--accent-rgb),.25);backdrop-filter:blur(var(--blur)) saturate(150%);-webkit-backdrop-filter:blur(var(--blur)) saturate(150%);box-shadow:inset 0 1px 0 rgba(255,255,255,.2),0 8px 24px rgba(0,0,0,.25);transition:.25s}.icon:hover{transform:translateY(-2px) scale(1.03)}
 .floatingSettings{position:fixed;top:16px;right:16px;z-index:50}
 main{width:min(1000px,calc(100% - 28px));margin:0 auto;padding:28px 0 150px}.view{display:none!important}.view.active{display:block!important;animation:in .25s ease;position:relative;z-index:1}@keyframes in{from{opacity:0;transform:translateY(7px)}to{opacity:1;transform:none}}
@@ -99,6 +99,7 @@ input[type=color]{width:90px;height:42px;padding:3px;border-radius:10px;backgrou
 
 <script>
 const KEY='adaptive_ai_v4';
+const BACKEND_URL='https://adaptive-ai-brain-v6-production.up.railway.app/api/chat';
 let data=JSON.parse(localStorage.getItem(KEY)||'null')||{chats:[],active:null,learning:true,prefs:{length:'Balanced',tone:'Natural',format:'Clean'},signals:0,accent:'#ffffff',opacity:.11,blur:24};
 
 function save(){localStorage.setItem(KEY,JSON.stringify(data));renderAll()}
@@ -138,17 +139,77 @@ function send(){
  c.messages.push({role:'user',text});
  p.value='';data.signals++;
  if(data.learning)adapt(text);
- const reply=generateReply(text);
- c.messages.push({role:'ai',text:reply});
  save();renderMessages();document.getElementById('chatTitle').textContent=c.title;
+ callBackend(c);
 }
-function generateReply(t){
- const x=t.toLowerCase();
- if(x.includes('hello')||x.includes('hi'))return 'Hey! I’m Adaptive AI. Tell me what you want to work on.';
- if(x.includes('plan'))return 'Absolutely. Tell me the goal, your deadline, and any limits you have. I’ll turn it into a clear plan.';
- if(x.includes('explain'))return 'Sure. I’ll keep the explanation clear and practical. Tell me the topic and I’ll break it down step by step.';
- if(x.includes('teach'))return 'Let’s learn it interactively. Give me the subject and I’ll start with the core idea, then examples and a quick check.';
- return data.prefs.length==='Short' ? 'Got it. Tell me a little more and I’ll keep the answer concise.' : 'Got it. I can help with that. Give me a little more context and I’ll work through it with you.';
+async function callBackend(chat){
+ const payload={
+   messages:chat.messages.map(m=>({role:m.role,content:m.text}))
+ };
+ 
+ try{
+   const response=await fetch(BACKEND_URL,{
+     method:'POST',
+     headers:{'Content-Type':'application/json'},
+     body:JSON.stringify(payload)
+   });
+   
+   if(!response.ok){
+     const err=await response.text();
+     console.error('Backend error:',response.status,err);
+     chat.messages.push({role:'ai',text:'Error: Backend returned '+response.status+'. '+err});
+     save();renderMessages();
+     return;
+   }
+   
+   if(!response.body){
+     chat.messages.push({role:'ai',text:'Error: No response body from backend'});
+     save();renderMessages();
+     return;
+   }
+   
+   const reader=response.body.getReader();
+   const decoder=new TextDecoder();
+   let fullReply='';
+   let aiMsg={role:'ai',text:''};
+   chat.messages.push(aiMsg);
+   
+   try{
+     while(true){
+       const {done,value}=await reader.read();
+       if(done)break;
+       const chunk=decoder.decode(value,{stream:true});
+       const lines=chunk.split('\n');
+       for(const line of lines){
+         if(!line.trim()||!line.startsWith('data:'))continue;
+         const data_str=line.slice(5).trim();
+         if(data_str==='[DONE]')break;
+         try{
+           const evt=JSON.parse(data_str);
+           if(evt.choices&&evt.choices[0]&&evt.choices[0].delta&&evt.choices[0].delta.content){
+             const content=evt.choices[0].delta.content;
+             aiMsg.text+=content;
+             fullReply+=content;
+           }
+         }catch(e){
+           console.warn('Parse error on SSE chunk:',data_str);
+         }
+       }
+     }
+   }finally{
+     reader.cancel();
+   }
+   
+   if(!fullReply){
+     aiMsg.text='Error: Empty response from backend';
+   }
+   
+   save();renderMessages();
+ }catch(err){
+   console.error('Fetch error:',err);
+   chat.messages.push({role:'ai',text:'Error: '+err.message});
+   save();renderMessages();
+ }
 }
 function adapt(t){
  const n=t.toLowerCase();
@@ -175,9 +236,10 @@ function renderSettings(){
 function hexToRgb(hex){const m=String(hex).replace('#','');const n=parseInt(m,16);return [(n>>16)&255,(n>>8)&255,n&255]}
 function applyTheme(){const [r,g,b]=hexToRgb(data.accent);document.documentElement.style.setProperty('--accent',data.accent);document.documentElement.style.setProperty('--accent-rgb',`${r},${g},${b}`);document.documentElement.style.setProperty('--glass',data.opacity);document.documentElement.style.setProperty('--blur',data.blur+'px')}
 function renderAll(){applyTheme();renderChats();renderMemory();renderSettings()}
-function esc(s){return String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]))}
+function esc(s){return String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','\"':'&quot;',\"'\":'&#39;'}[c]))}
 document.getElementById('prompt').addEventListener('keydown',e=>{if(e.key==='Enter'&&!e.shiftKey){e.preventDefault();send()}});
 renderAll();
 </script>
 </body>
 </html>
+
